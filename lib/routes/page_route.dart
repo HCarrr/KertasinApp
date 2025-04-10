@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:kertasinapp/pages/login/LoginPage.dart';
 import 'package:kertasinapp/routes/route_name.dart';
-import 'package:kertasinapp/pages/HomeScreen.dart';
+import 'package:kertasinapp/pages/home/HomeScreen.dart';
 
 class PagesRoute {
   static final pages = [

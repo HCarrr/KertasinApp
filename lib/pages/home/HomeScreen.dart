@@ -34,7 +34,7 @@ class Homescreen extends StatelessWidget {
                 Expanded(
                     child: Text(
                   "Kertas-in",
-                  style: TStyle.judul,
+                  style: TStyle.subtitle1,
                 )),
               ],
             ),

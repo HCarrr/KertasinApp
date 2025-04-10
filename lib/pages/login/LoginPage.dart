@@ -24,7 +24,7 @@ class LoginPage extends StatelessWidget {
             Spacer(),
             Text(
               "Login",
-              style: TStyle.subtitle1,
+              style: TStyle.title,
             ),
           ],
         ));
