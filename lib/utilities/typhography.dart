@@ -5,7 +5,7 @@ class TStyle {
   // Judul pakai MuseoModerno
   static const TextStyle title = TextStyle(
     fontFamily: 'MuseoModerno',
-    fontSize: 30,
+    fontSize: 35,
     fontWeight: FontWeight.bold,
   );
 
