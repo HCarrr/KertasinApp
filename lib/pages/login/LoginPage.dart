@@ -15,6 +15,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kColorPureWhite,
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Positioned(
@@ -96,7 +97,7 @@ class LoginPage extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: () {
-                              Get.to(() => const Homescreen());
+                              Get.to(() => Homescreen());
                             },
                             child: Text(
                               " Register",
@@ -110,32 +111,37 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
-              const Spacer(),
-              Text(
-                "atau Login dengan",
-                style: TStyle.textChat,
-              ),
-              IconButton(
-                onPressed: () {
-                  // Aksi saat diklik
-                },
-                icon: Image.asset(
-                  AssetsConstant.icGoogle,
-                  width: 46,
-                  height: 46,
-                ),
-              ),
-              const SizedBox(height: 26),
-              Container(
-                height: Get.height * 0.06,
-                decoration: BoxDecoration(
-                  color: kColorFirst,
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(150),
+              SizedBox(height: Get.height * 0.25),
+            ],
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Column(
+              children: [
+                Text("atau Login dengan", style: TStyle.textChat),
+                IconButton(
+                  onPressed: () {
+                    // aksi login dengan google
+                  },
+                  icon: Image.asset(
+                    AssetsConstant.icGoogle,
+                    width: 46,
+                    height: 46,
                   ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 16),
+                Container(
+                  height: Get.height * 0.06,
+                  decoration: BoxDecoration(
+                    color: kColorFirst,
+                    borderRadius:
+                        const BorderRadius.vertical(top: Radius.circular(150)),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
