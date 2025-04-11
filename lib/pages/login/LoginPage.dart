@@ -13,12 +13,12 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Inisialisasi controller menggunakan GetX
     final LoginController controller = Get.put(LoginController());
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: kColorPureWhite,
-      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Positioned(
@@ -72,7 +72,8 @@ class LoginPage extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.all(18),
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 217, 226, 255).withOpacity(0.25),
+                  color: const Color.fromARGB(255, 217, 226, 255)
+                      .withOpacity(0.25),
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Padding(
@@ -108,7 +109,8 @@ class LoginPage extends StatelessWidget {
                                   },
                                   child: Text(
                                     " Register",
-                                    style: TStyle.textChat.copyWith(color: kColorPrimary),
+                                    style: TStyle.textChat
+                                        .copyWith(color: kColorPrimary),
                                   ),
                                 ),
                               ],
@@ -116,7 +118,8 @@ class LoginPage extends StatelessWidget {
                           ] else ...[
                             Text(
                               "Verifikasi Email Anda",
-                              style: TStyle.subtitle1.copyWith(color: kColorDarkGrey),
+                              style: TStyle.subtitle1
+                                  .copyWith(color: kColorDarkGrey),
                               textAlign: TextAlign.center,
                             ),
                             const SizedBox(height: 8),
@@ -140,11 +143,13 @@ class LoginPage extends StatelessWidget {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    controller.showVerificationMessage.value = false;
+                                    controller.showVerificationMessage.value =
+                                        false;
                                   },
                                   child: Text(
                                     " Login",
-                                    style: TStyle.textChat.copyWith(color: kColorPrimary),
+                                    style: TStyle.textChat
+                                        .copyWith(color: kColorPrimary),
                                   ),
                                 ),
                               ],
@@ -156,8 +161,9 @@ class LoginPage extends StatelessWidget {
               ),
               Obx(() => SizedBox(
                     height: controller.showVerificationMessage.value
-                        ? Get.height * 0.2 
-                        : Get.height * 0.1, 
+                        ? Get.height *
+                            0.2 // Tinggi untuk tampilan Kirim Ulang Verifikasi
+                        : Get.height * 0.1, // Tinggi untuk tampilan Login
                   )),
               Obx(() => !controller.showVerificationMessage.value
                   ? Column(
@@ -175,10 +181,12 @@ class LoginPage extends StatelessWidget {
                                 AssetsConstant.icGoogle,
                                 width: 46,
                                 height: 46,
-                                errorBuilder: (context, error, stackTrace) => const Icon(Icons.error),
+                                errorBuilder: (context, error, stackTrace) =>
+                                    const Icon(Icons.error),
                               ),
                             ),
-                            if (controller.isLoading.value) const CircularProgressIndicator(),
+                            if (controller.isLoading.value)
+                              const CircularProgressIndicator(),
                           ],
                         ),
                       ],
@@ -193,8 +201,8 @@ class LoginPage extends StatelessWidget {
                     top: Radius.circular(150),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),
