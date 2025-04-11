@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kertasinapp/pages/home/HomeScreen.dart';
+import 'package:kertasinapp/pages/invoice/InvoicePembelianPage.dart';
 import 'package:kertasinapp/pages/login/LoginPage.dart';
 
 import 'routes/page_route.dart';
