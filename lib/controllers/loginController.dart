@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:kertasinapp/todo.dart';
+import 'package:kertasinapp/pages/home/HomeScreen.dart';
 
 class LoginController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -23,7 +23,8 @@ class LoginController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _googleSignIn.signOut(); // Logout dari Google Sign-In saat controller diinisialisasi
+    _googleSignIn
+        .signOut(); // Logout dari Google Sign-In saat controller diinisialisasi
   }
 
   Future<void> login() async {
@@ -59,7 +60,7 @@ class LoginController extends GetxController {
         }, SetOptions(merge: true));
 
         isLoading.value = false;
-        Get.off(() => const TodoPage());
+        Get.off(() => Homescreen());
       }
     } catch (e) {
       print("Login error: $e");
@@ -107,7 +108,8 @@ class LoginController extends GetxController {
     for (int attempt = 1; attempt <= 3; attempt++) {
       try {
         print("Attempt $attempt: Signing in with Google...");
-        final GoogleSignInAccount? googleUser = await Future.delayed(Duration.zero, () => _googleSignIn.signIn());
+        final GoogleSignInAccount? googleUser =
+            await Future.delayed(Duration.zero, () => _googleSignIn.signIn());
         return googleUser;
       } catch (e) {
         print("Attempt $attempt failed: $e");
@@ -143,20 +145,23 @@ class LoginController extends GetxController {
         return;
       }
 
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
       final OAuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      UserCredential userCredential = await _auth.signInWithCredential(credential);
+      UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
       User? user = userCredential.user;
 
       if (user != null) {
         print("Google Sign-In successful: ${user.email}");
 
         // Ambil data pengguna yang sudah ada dari Firestore (jika ada)
-        DocumentSnapshot userDoc = await _firestore.collection('users').doc(user.uid).get();
+        DocumentSnapshot userDoc =
+            await _firestore.collection('users').doc(user.uid).get();
         String? existingName;
 
         if (userDoc.exists) {
@@ -164,20 +169,25 @@ class LoginController extends GetxController {
         }
 
         // Prioritaskan nama dari Google Sign-In jika belum ada nama sebelumnya
-        String finalName = existingName ?? googleUser.displayName ?? user.displayName ?? 'Unknown';
+        String finalName = existingName ??
+            googleUser.displayName ??
+            user.displayName ??
+            'Unknown';
 
         // Simpan data pengguna ke Firestore
         await _firestore.collection('users').doc(user.uid).set({
           'name': finalName,
           'email': googleUser.email ?? user.email ?? 'Unknown',
-          'createdAt': userDoc.exists ? userDoc.get('createdAt') : FieldValue.serverTimestamp(),
+          'createdAt': userDoc.exists
+              ? userDoc.get('createdAt')
+              : FieldValue.serverTimestamp(),
           'lastLogin': FieldValue.serverTimestamp(),
         }, SetOptions(merge: true));
 
         print("User data saved to Firestore: ${user.email}");
         isLoading.value = false;
         isSigningIn.value = false;
-        Get.off(() => const TodoPage());
+        Get.off(() => Homescreen());
       } else {
         print("Google Sign-In failed: No user returned");
         isLoading.value = false;
