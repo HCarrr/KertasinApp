@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'colors.dart';
 
 class TStyle {
-  // Judul pakai MuseoModerno
   static const TextStyle title = TextStyle(
     fontFamily: 'MuseoModerno',
     fontSize: 35,
@@ -48,7 +47,7 @@ class TStyle {
     fontFamily: 'Roboto',
     fontWeight: FontWeight.w500,
     fontSize: 14,
-    color: kColorPureWhite,
+    color: kColorPureBlack,
   );
 
   static const TextStyle textChatItalic = TextStyle(
@@ -74,24 +73,24 @@ class TStyle {
   );
 
   static const TextStyle body1 = TextStyle(
-    fontFamily: 'Roboto',
-    fontWeight: FontWeight.w500,
-    fontSize: 16,
+    fontFamily: 'MuseoModerno',
+    fontWeight: FontWeight.w700,
+    fontSize: 18,
     color: kColorDarkGrey,
   );
 
   static const TextStyle subtitle2 = TextStyle(
     fontFamily: 'Roboto',
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w600,
     fontSize: 16,
     color: kColorDarkGrey,
   );
 
   static const TextStyle subtitle1 = TextStyle(
     fontFamily: 'MuseoModerno',
-    fontWeight: FontWeight.w700,
-    fontSize: 16,
-    color: kColorDarkGrey,
+    fontWeight: FontWeight.w500,
+    fontSize: 18,
+    color: kColorMediumGrey,
   );
 
   static const TextStyle headline4 = TextStyle(
