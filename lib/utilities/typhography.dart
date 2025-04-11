@@ -19,20 +19,20 @@ class TStyle {
     fontFamily: 'Roboto',
     fontWeight: FontWeight.w400,
     fontSize: 12,
-    color: kColorDarkGrey,
+    color: kColorMediumGrey,
   );
 
   static const TextStyle captionBlack = TextStyle(
     fontFamily: 'Roboto',
     fontWeight: FontWeight.w400,
-    fontSize: 10,
+    fontSize: 14,
     color: kColorDarkGrey,
   );
 
   static const TextStyle captionWhite = TextStyle(
     fontFamily: 'Roboto',
-    fontWeight: FontWeight.w400,
-    fontSize: 10,
+    fontWeight: FontWeight.w500,
+    fontSize: 12,
     color: kColorPureWhite,
   );
 
@@ -82,7 +82,7 @@ class TStyle {
   static const TextStyle subtitle2 = TextStyle(
     fontFamily: 'Roboto',
     fontWeight: FontWeight.w600,
-    fontSize: 16,
+    fontSize: 14,
     color: kColorDarkGrey,
   );
 
@@ -95,9 +95,9 @@ class TStyle {
 
   static const TextStyle headline4 = TextStyle(
     fontFamily: 'MuseoModerno',
-    fontWeight: FontWeight.w700,
-    fontSize: 22,
-    color: kColorDarkGrey,
+    fontWeight: FontWeight.bold,
+    fontSize: 20,
+    color: kColorPureWhite,
   );
 
   static const TextStyle headline3 = TextStyle(

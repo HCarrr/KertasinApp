@@ -13,12 +13,12 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Inisialisasi controller menggunakan GetX
     final LoginController controller = Get.put(LoginController());
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: kColorPureWhite,
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Positioned(
@@ -156,8 +156,8 @@ class LoginPage extends StatelessWidget {
               ),
               Obx(() => SizedBox(
                     height: controller.showVerificationMessage.value
-                        ? Get.height * 0.2 // Tinggi untuk tampilan Kirim Ulang Verifikasi
-                        : Get.height * 0.1, // Tinggi untuk tampilan Login
+                        ? Get.height * 0.2 
+                        : Get.height * 0.1, 
                   )),
               Obx(() => !controller.showVerificationMessage.value
                   ? Column(
@@ -193,8 +193,8 @@ class LoginPage extends StatelessWidget {
                     top: Radius.circular(150),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),

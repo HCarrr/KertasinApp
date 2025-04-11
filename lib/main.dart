@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:kertasinapp/pages/home/HomeScreen.dart';
+import 'package:kertasinapp/pages/invoice/InvoicePembelianPage.dart';
 import 'package:kertasinapp/pages/login/LoginPage.dart';
 
 void main() async {
