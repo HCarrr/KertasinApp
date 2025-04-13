@@ -41,6 +41,9 @@ class ProfileController extends GetxController {
   var completionPercentage = 0.0.obs;
   var incompleteFieldsMessage = ''.obs;
 
+  // Batasan panjang karakter untuk role
+  static const int maxRoleLength = 15;
+
   @override
   void onInit() {
     super.onInit();
@@ -91,7 +94,9 @@ class ProfileController extends GetxController {
         selectedRole.value = userRole;
       } else if (userRole.isNotEmpty) {
         selectedRole.value = 'Lainnya';
-        roleManualController.text = userRole;
+        roleManualController.text = userRole.length > maxRoleLength
+            ? userRole.substring(0, maxRoleLength)
+            : userRole;
         showRoleManualField.value = true;
       } else {
         selectedRole.value = null;
@@ -180,6 +185,21 @@ class ProfileController extends GetxController {
     }
   }
 
+  // Fungsi untuk memvalidasi panjang role manual
+  bool validateRoleLength() {
+    if (selectedRole.value == 'Lainnya' && roleManualController.text.length > maxRoleLength) {
+      Get.snackbar(
+        'Error',
+        'Panjang Role melebihi batas (maksimum $maxRoleLength karakter)',
+        backgroundColor: Colors.redAccent,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return false;
+    }
+    return true;
+  }
+
   // Fungsi untuk menyimpan data ke Firestore
   Future<void> saveData() async {
     if (selectedRole.value == 'Lainnya' && roleManualController.text.isEmpty) {
@@ -190,6 +210,11 @@ class ProfileController extends GetxController {
         colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
       );
+      return;
+    }
+
+    // Validasi panjang role sebelum menyimpan
+    if (!validateRoleLength()) {
       return;
     }
 

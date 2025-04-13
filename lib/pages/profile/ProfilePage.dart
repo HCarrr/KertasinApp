@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:kertasinapp/controllers/profileController.dart';
 import 'package:kertasinapp/pages/home/HomeScreen.dart';
@@ -517,6 +518,9 @@ class ProfilPage extends StatelessWidget {
                   controller.updateCurrentRole();
                   controller.calculateAndUpdateCompletion();
                 },
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(ProfileController.maxRoleLength),
+                ],
                 decoration: InputDecoration(
                   labelText: "Masukkan Role",
                   labelStyle: TStyle.body2.copyWith(
