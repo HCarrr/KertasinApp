@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:kertasinapp/pages/home/HomeScreen.dart';
+import 'package:kertasinapp/pages/main/main_page.dart';
 
 class LoginController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -60,7 +60,7 @@ class LoginController extends GetxController {
         }, SetOptions(merge: true));
 
         isLoading.value = false;
-        Get.off(() => Homescreen());
+        Get.off(() => MainPage());
       }
     } catch (e) {
       print("Login error: $e");
@@ -187,7 +187,7 @@ class LoginController extends GetxController {
         print("User data saved to Firestore: ${user.email}");
         isLoading.value = false;
         isSigningIn.value = false;
-        Get.off(() => Homescreen());
+        Get.off(() => MainPage());
       } else {
         print("Google Sign-In failed: No user returned");
         isLoading.value = false;

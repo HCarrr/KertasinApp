@@ -12,7 +12,7 @@ class CardNews extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
-      height: Get.height * 0.2,
+      height: Get.height * 0.15,
       margin: EdgeInsets.only(top: 18),
       decoration: BoxDecoration(
         color: kColorPureWhite,

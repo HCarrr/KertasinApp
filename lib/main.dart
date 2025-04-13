@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:kertasinapp/pages/home/HomeScreen.dart';
 import 'package:kertasinapp/pages/invoice/InvoicePembelianPage.dart';
 import 'package:kertasinapp/pages/login/LoginPage.dart';
+import 'package:kertasinapp/routes/page_route.dart';
+import 'package:kertasinapp/routes/route_name.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +29,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginPage(),
+      initialRoute: RoutesName.mainPage,
+      getPages: PagesRoute.pages,
     );
   }
 }

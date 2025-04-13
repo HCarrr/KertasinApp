@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:kertasinapp/controllers/home/home_controller.dart';
 import 'package:kertasinapp/controllers/home/productButtonController.dart';
 import 'package:kertasinapp/pages/profile/ProfilePage.dart';
 import 'package:kertasinapp/utilities/colors.dart';
@@ -17,36 +18,6 @@ class Homescreen extends StatelessWidget {
 
   final controller = Get.put(ProductButtonController());
 
-  Future<void> signOut() async {
-    try {
-      final GoogleSignIn googleSignIn = GoogleSignIn();
-      await googleSignIn.signOut();
-      print("Logged out from Google Sign-In");
-
-      await FirebaseAuth.instance.signOut();
-      print("Logged out from Firebase Authentication");
-
-      Get.offAll(() => const LoginPage());
-
-      Get.snackbar(
-        'Logout Berhasil',
-        'Anda telah logout. Silakan login dengan akun lain.',
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    } catch (e) {
-      print("Logout error: $e");
-      Get.snackbar(
-        'Logout Gagal',
-        e.toString(),
-        backgroundColor: Colors.redAccent,
-        colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
@@ -58,7 +29,8 @@ class Homescreen extends StatelessWidget {
           .snapshots(),
       builder: (context, snapshot) {
         // Menampilkan loading indicator jika data belum tersedia
-        if (snapshot.connectionState == ConnectionState.waiting || !snapshot.hasData) {
+        if (snapshot.connectionState == ConnectionState.waiting ||
+            !snapshot.hasData) {
           return const Center(child: CircularProgressIndicator());
         }
 
@@ -86,7 +58,7 @@ class Homescreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: kColorFirst,
                   borderRadius: BorderRadius.vertical(
-                    bottom: Radius.circular(35),
+                    bottom: Radius.circular(24),
                   ),
                 ),
                 child: Padding(
@@ -112,12 +84,6 @@ class Homescreen extends StatelessWidget {
                             isPrimary: false,
                           ),
                           Spacer(),
-                          IconButton(
-                            icon: const Icon(Icons.logout),
-                            onPressed: signOut,
-                            tooltip: "Logout",
-                            color: kColorPureWhite,
-                          ),
                         ],
                       ),
                       SizedBox(height: Get.height * 0.03),
@@ -167,55 +133,6 @@ class Homescreen extends StatelessWidget {
                 ),
               ),
             ],
-          ),
-          bottomNavigationBar: Container(
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            decoration: BoxDecoration(
-              color: kColorFirst,
-              borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(24)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  offset: const Offset(0, -1),
-                  blurRadius: 4,
-                ),
-              ],
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.home, color: kColorPureWhite, size: 28),
-                    const SizedBox(height: 4),
-                    Text("Home", style: TStyle.captionWhite),
-                  ],
-                ),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.receipt_long, color: kColorPureWhite, size: 28),
-                    const SizedBox(height: 4),
-                    Text("Pencatatan", style: TStyle.captionWhite),
-                  ],
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Get.to(ProfilPage());
-                  },
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.person, color: kColorPureWhite, size: 28),
-                      const SizedBox(height: 4),
-                      Text("Profil", style: TStyle.captionWhite),
-                    ],
-                  ),
-                ),
-              ],
-            ),
           ),
         );
       },
