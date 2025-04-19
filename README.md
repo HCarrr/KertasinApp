@@ -1,15 +1,50 @@
-# kertasinapp
+# Kertasin App
+Aplikasi Kertasin adalah aplikasi mobile berbasis Flutter untuk pencatatan invoice digital dan pencatatan keuangan yang lebih efisien untuk usaha seperti Agen Sembako. Aplikasi ini mendukung autentikasi pengguna dengan Firebase dan menyediakan antarmuka yang ramah pengguna.
 
-A new Flutter project.
+## Cara Instalasi dan Menjalankan Aplikasi
+1. Clone Repository
+   Buka terminal, ketik "git clone https://github.com/HCarrr/KertasinApp.git"
+2. Instal Dependensi
+   Pada terminal, Jalankan perintah "flutter pub get"
+3. Jalankan Aplikasi
+   Hubungkan perangkat atau jalankan emulator/simulator. Jalankan aplikasi dengan perintah "flutter run"
+   (Opsional) Untuk build release, jalankan perintah pada terminal:
+       flutter build apk --release # Untuk Android
+       flutter build ios --release # Untuk iOS
 
-## Getting Started
+Note: Untuk login via Google Sign In memerlukan SHA1 Key untuk didaftarkan pada firebase. Jika ingin ditest login melalui Google Sign In, bisa japri ke WA 08159827491 untuk didaftarkan SHA1 Key nya.
 
-This project is a starting point for a Flutter application.
+## Fitur dan Teknologi
+Fitur Utama:
+1. Autentikasi Pengguna: Registrasi, login, dan reset password menggunakan Firebase Authentication yang terintegrasi Google Sign In.
+2. Antarmuka Responsif: Desain UI yang konsisten untuk semua halaman.
+3. Manajemen Data: Pencatatan Biaya, History Invoice Pembelian, History Invoice Penjualan, Data Barang, Total Pengeluaran, Total Pemasukan.
 
-A few resources to get you started if this is your first Flutter project:
+## Teknologi yang Digunakan
+- Flutter: Framework UI untuk pengembangan aplikasi lintas platform (Android dan iOS).
+- Dart: Bahasa pemrograman untuk Flutter.
+- Firebase:
+  Firebase Authentication: untuk autentikasi pengguna.
+  Firestore Database: Untuk penyimpanan data berbasis cloud.
+- GetX: Manajemen state dan navigasi yang ringan.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Struktur Folder
+KertasinApp/
+├── android/          # Konfigurasi untuk platform Android
+├── ios/              # Konfigurasi untuk platform iOS
+├── lib/              # Kode sumber utama aplikasi (Dart)
+├── assets/           # Aset seperti gambar dan ikon
+├── fonts/            # File font kustom
+├── web/              # Konfigurasi untuk platform Web
+├── windows/          # Konfigurasi untuk platform Windows
+├── macos/            # Konfigurasi untuk platform macOS
+├── linux/            # Konfigurasi untuk platform Linux
+├── test/             # Unit dan widget tests
+├── .vscode/          # Konfigurasi editor Visual Studio Code
+├── pubspec.yaml      # File konfigurasi proyek Flutter
+├── firebase.json     # Konfigurasi Firebase
+└── README.md         # Dokumentasi proyek
+
 
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
