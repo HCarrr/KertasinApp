@@ -51,23 +51,24 @@ class ResetPasswordController extends GetxController {
 
     try {
       isLoading.value = true;
-      print("Attempting to send password reset email to: $email");
+      print("Mencoba mengirim email reset password ke: $email");
 
       // Kirim email reset password menggunakan Firebase
       await _auth.sendPasswordResetEmail(email: email);
 
-      print("Password reset email sent successfully");
+      print("Email reset password berhasil dikirim ke: $email");
       showSuccessMessage.value = true;
 
       Get.snackbar(
         'Sukses',
-        'Link reset password telah dikirim. Silakan cek inbox atau spam folder Anda.',
+        'Link reset password telah dikirim ke $email. Silakan cek inbox atau folder spam Anda. Tidak menerima? Hubungi dukungan.',
         backgroundColor: Colors.green,
         colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
+        duration: const Duration(seconds: 5),
       );
     } catch (e) {
-      print("Reset password error: $e");
+      print("Error reset password: $e");
       String errorMessage = 'Gagal mengirim link reset password.';
       if (e is FirebaseAuthException) {
         switch (e.code) {
@@ -91,8 +92,11 @@ class ResetPasswordController extends GetxController {
           case 'too-many-requests':
             errorMessage = 'Terlalu banyak percobaan. Tunggu beberapa menit dan coba lagi.';
             break;
+          case 'network-request-failed':
+            errorMessage = 'Gagal terhubung ke server. Periksa koneksi internet Anda.';
+            break;
           default:
-            errorMessage = 'Error: ${e.message}';
+            errorMessage = 'Error: ${e.message ?? e.toString()}';
         }
       }
       Get.snackbar(

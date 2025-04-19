@@ -33,7 +33,7 @@ class ResetPasswordPage extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: Get.height * 0.3,
+            top: Get.height * 0.2,
             left: -50,
             child: Container(
               width: 100,
@@ -47,7 +47,7 @@ class ResetPasswordPage extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: Get.height * 0.5,
+            top: Get.height * 0.4,
             right: -50,
             child: Container(
               width: 100,
@@ -60,137 +60,136 @@ class ResetPasswordPage extends StatelessWidget {
               ),
             ),
           ),
-          Column(
-            children: [
-              const Spacer(),
-              Text(
-                "Reset Password",
-                style: TStyle.title,
-              ),
-              Container(
-                margin: const EdgeInsets.all(18),
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 217, 226, 255)
-                      .withOpacity(0.25),
-                  borderRadius: BorderRadius.circular(15),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Reset Password",
+                  style: TStyle.title,
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Obx(() => Column(
-                        children: [
-                          if (!controller.showSuccessMessage.value) ...[
-                            CustomTextField(
-                              hintText: 'Email',
-                              controller: controller.emailController,
-                            ),
-                            const SizedBox(height: 16),
-                            Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Buttondefault(
-                                  text: "Kirim Link Reset Password",
-                                  onTap: controller.isLoading.value
-                                      ? null
-                                      : controller.resetPassword,
-                                ),
-                                if (controller.isLoading.value)
-                                  const CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        kColorPrimary),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 217, 226, 255).withOpacity(0.25),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Obx(() => Column(
+                          children: [
+                            if (!controller.showSuccessMessage.value) ...[
+                              CustomTextField(
+                                hintText: 'Email',
+                                controller: controller.emailController,
+                              ),
+                              const SizedBox(height: 16),
+                              Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  Buttondefault(
+                                    text: "Kirim Link Reset Password",
+                                    onTap: controller.isLoading.value
+                                        ? null
+                                        : controller.resetPassword,
                                   ),
-                              ],
-                            ),
-                            const SizedBox(height: 16),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Kembali ke",
-                                  style: TStyle.textChat,
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    Get.back();
-                                  },
-                                  child: Text(
-                                    " Login",
-                                    style: TStyle.textChat
-                                        .copyWith(color: kColorPrimary),
+                                  if (controller.isLoading.value)
+                                    const CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          kColorPrimary),
+                                    ),
+                                ],
+                              ),
+                              const SizedBox(height: 16),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Kembali ke",
+                                    style: TStyle.textChat,
                                   ),
-                                ),
-                              ],
-                            ),
-                          ] else ...[
-                            Text(
-                              "Link Reset Password Terkirim",
-                              style: TStyle.subtitle1
-                                  .copyWith(color: kColorDarkGrey),
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              "Link reset password telah dikirim ke (${controller.emailController.text}). Silakan cek inbox atau spam folder Anda.",
-                              style: TStyle.body2,
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(height: 16),
-                            Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Buttondefault(
-                                  text: "Kirim Ulang Link",
-                                  onTap: controller.isLoading.value
-                                      ? null
-                                      : controller.resetPassword,
-                                ),
-                                if (controller.isLoading.value)
-                                  const CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        kColorPrimary),
+                                  InkWell(
+                                    onTap: () {
+                                      Get.back();
+                                    },
+                                    child: Text(
+                                      " Login",
+                                      style: TStyle.textChat
+                                          .copyWith(color: kColorPrimary),
+                                    ),
                                   ),
-                              ],
-                            ),
-                            const SizedBox(height: 16),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Kembali ke",
-                                  style: TStyle.textChat,
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    Get.back();
-                                  },
-                                  child: Text(
-                                    " Login",
-                                    style: TStyle.textChat
-                                        .copyWith(color: kColorPrimary),
+                                ],
+                              ),
+                            ] else ...[
+                              Text(
+                                "Link Reset Password Terkirim",
+                                style: TStyle.subtitle1
+                                    .copyWith(color: kColorDarkGrey),
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                "Link reset password telah dikirim ke (${controller.emailController.text}). Silakan cek inbox atau folder spam Anda.",
+                                style: TStyle.body2,
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 16),
+                              Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  Buttondefault(
+                                    text: "Kirim Ulang Link",
+                                    onTap: controller.isLoading.value
+                                        ? null
+                                        : controller.resetPassword,
                                   ),
-                                ),
-                              ],
-                            ),
+                                  if (controller.isLoading.value)
+                                    const CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          kColorPrimary),
+                                    ),
+                                ],
+                              ),
+                              const SizedBox(height: 16),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Kembali ke",
+                                    style: TStyle.textChat,
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      Get.back();
+                                    },
+                                    child: Text(
+                                      " Login",
+                                      style: TStyle.textChat
+                                          .copyWith(color: kColorPrimary),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ],
-                        ],
-                      )),
-                ),
-              ),
-              Obx(() => SizedBox(
-                    height: controller.showSuccessMessage.value
-                        ? Get.height * 0.2
-                        : Get.height * 0.1,
-                  )),
-              const SizedBox(height: 26),
-              Container(
-                height: Get.height * 0.06,
-                decoration: const BoxDecoration(
-                  color: kColorFirst,
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(150),
+                        )),
                   ),
                 ),
+              ],
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            child: Container(
+              height: Get.height * 0.06,
+              width: Get.width,
+              decoration: const BoxDecoration(
+                color: kColorFirst,
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(150),
+                ),
               ),
-            ],
+            ),
           ),
         ],
       ),
