@@ -11,16 +11,13 @@ class ProfilPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Inisialisasi controller menggunakan GetX
     final ProfileController controller = Get.put(ProfileController());
 
     return Obx(() {
-      // Menampilkan loading indicator jika data belum tersedia
       if (controller.userData.value == null) {
         return const Center(child: CircularProgressIndicator());
       }
 
-      // Data tersedia, lanjutkan rendering UI
       final userName =
           controller.userData.value?['name'] as String? ?? 'Unknown';
       final userEmail =

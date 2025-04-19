@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:kertasinapp/pages/barang/BarangPage.dart';
 import 'package:kertasinapp/pages/invoice/InvoicePembelianPage.dart';
+import 'package:kertasinapp/pages/invoice/InvoicePenjualanPage.dart';
 import 'package:kertasinapp/pages/login/LoginPage.dart';
 import 'package:kertasinapp/routes/route_name.dart';
 

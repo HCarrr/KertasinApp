@@ -180,6 +180,7 @@ class ProfileController extends GetxController {
         roleManualController.text.length > maxRoleLength) {
       showErrorSnackbarFromTop(
           'Panjang Role melebihi batas (maksimum $maxRoleLength karakter)');
+
       return false;
     }
     return true;
@@ -189,6 +190,10 @@ class ProfileController extends GetxController {
     if (selectedRole.value == 'Lainnya' && roleManualController.text.isEmpty) {
       showErrorSnackbarFromTop(
           'Error, Lengkapi data berikut: Role (Masukkan Role Manual)');
+      return;
+    }
+
+    if (!validateRoleLength()) {
       return;
     }
 
