@@ -37,7 +37,7 @@ class TStyle {
   static const TextStyle captionWhite = TextStyle(
     fontFamily: 'Roboto',
     fontWeight: FontWeight.w500,
-    fontSize: 12,
+    fontSize: 14,
     color: kColorPureWhite,
   );
 
@@ -55,12 +55,11 @@ class TStyle {
     color: kColorPureBlack,
   );
 
-  static const TextStyle textChatItalic = TextStyle(
+  static const TextStyle appbar = TextStyle(
     fontFamily: 'Roboto',
     fontWeight: FontWeight.w500,
-    fontSize: 14,
-    color: kColorMediumGrey,
-    fontStyle: FontStyle.italic,
+    fontSize: 12,
+    color: kColorPureWhite,
   );
 
   static const TextStyle button1 = TextStyle(

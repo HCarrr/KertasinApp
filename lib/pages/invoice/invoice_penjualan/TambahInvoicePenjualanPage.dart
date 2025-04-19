@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kertasinapp/controllers/tambahInvoicePenjualanController.dart';
 import 'package:kertasinapp/utilities/colors.dart';
 import 'package:kertasinapp/utilities/typhography.dart';
+
+import '../../../controllers/invoice/invoice_penjualan/tambahInvoicePenjualanController.dart';
 
 class TambahInvoicePenjualanPage extends StatelessWidget {
   TambahInvoicePenjualanPage({Key? key}) : super(key: key);
@@ -286,13 +287,8 @@ class TambahInvoicePenjualanPage extends StatelessWidget {
                           int.tryParse(jumlahBarangController.text) ?? 0;
 
                       if (jumlah <= 0) {
-                        Get.snackbar(
-                          "Error",
-                          "Jumlah harus lebih dari 0",
-                          backgroundColor: kColorFourth.withOpacity(0.8),
-                          colorText: kColorPureWhite,
-                          snackPosition: SnackPosition.BOTTOM,
-                        );
+                        showErrorSnackbarFromTop(
+                            "Error, \nJumlah harus lebih dari 0");
                         return;
                       }
 
@@ -307,13 +303,8 @@ class TambahInvoicePenjualanPage extends StatelessWidget {
                         searchController.clear();
                         controller.searchQuery.value = '';
 
-                        Get.snackbar(
-                          "Sukses",
-                          "Barang berhasil ditambahkan",
-                          backgroundColor: kColorThird.withOpacity(0.8),
-                          colorText: kColorPureWhite,
-                          snackPosition: SnackPosition.BOTTOM,
-                        );
+                        showSuccessSnackbarFromTop(
+                            "Sukses, \nBarang berhasil ditambahkan");
                       }
                     },
                     style: ElevatedButton.styleFrom(
@@ -533,27 +524,14 @@ class TambahInvoicePenjualanPage extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           if (controller.items.isEmpty) {
-            Get.snackbar(
-              "Error",
-              "Tambahkan minimal satu barang",
-              backgroundColor: kColorFourth.withOpacity(0.8),
-              colorText: kColorPureWhite,
-              snackPosition: SnackPosition.BOTTOM,
-            );
+            showErrorSnackbarFromTop("Error, \nTambahkan minimal satu barang");
             return;
           }
 
-          if (controller.namaPelanggan.value.isEmpty) {
-            Get.snackbar(
-              "Error",
-              "Harap isi nama pelanggan",
-              backgroundColor: kColorFourth.withOpacity(0.8),
-              colorText: kColorPureWhite,
-              snackPosition: SnackPosition.BOTTOM,
-            );
+          if (controller.namaPelanggan.value.trim().isEmpty) {
+            showErrorSnackbarFromTop("Error, \nHarap masukkan nama pelanggan");
             return;
           }
-
           _showConfirmationDialog();
         },
         style: ElevatedButton.styleFrom(
@@ -609,6 +587,54 @@ class TambahInvoicePenjualanPage extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  showSuccessSnackbarFromTop(String message) {
+    Get.rawSnackbar(
+      messageText: Row(
+        children: [
+          Icon(Icons.check_circle_outline, color: Colors.white),
+          SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              message,
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
+      ),
+      backgroundColor: Colors.green.shade600,
+      borderRadius: 16,
+      margin: const EdgeInsets.all(16),
+      snackPosition: SnackPosition.TOP,
+      animationDuration: const Duration(milliseconds: 300),
+      duration: const Duration(seconds: 2),
+      isDismissible: true,
+    );
+  }
+
+  showErrorSnackbarFromTop(String message) {
+    Get.rawSnackbar(
+      messageText: Row(
+        children: [
+          const Icon(Icons.error_outline, color: Colors.white),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              message,
+              style: const TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
+      ),
+      backgroundColor: Colors.red.shade600,
+      borderRadius: 16,
+      margin: const EdgeInsets.all(16),
+      snackPosition: SnackPosition.TOP,
+      animationDuration: const Duration(milliseconds: 300),
+      duration: const Duration(seconds: 2),
+      isDismissible: true,
     );
   }
 }
