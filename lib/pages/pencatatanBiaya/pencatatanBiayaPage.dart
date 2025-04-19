@@ -249,14 +249,11 @@ class PencatatanBiayaPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("No. Inovice: ${item['nomorInvoice']}",
-              style: const TextStyle(fontWeight: FontWeight.bold)),
-          Text(
-              "Total Biaya: Rp ${numberFormat.format(item['totalHarga']).replaceAll(',', '.')}"),
-          const SizedBox(height: 4),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Text("No. Inovice: ${item['nomorInvoice']}",
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
+              Spacer(),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
@@ -273,6 +270,15 @@ class PencatatanBiayaPage extends StatelessWidget {
                   ),
                 ),
               ),
+            ],
+          ),
+          Text(
+              "Total Biaya: Rp ${numberFormat.format(item['totalHarga']).replaceAll(',', '.')}"),
+          const SizedBox(height: 4),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Spacer(),
               Text("$formattedDate\n$formattedTime",
                   textAlign: TextAlign.right,
                   style: const TextStyle(fontSize: 11)),
