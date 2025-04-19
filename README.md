@@ -1,5 +1,5 @@
 # Kertasin App
-Aplikasi Kertasin adalah aplikasi mobile berbasis Flutter untuk pencatatan invoice digital dan pencatatan keuangan yang lebih efisien untuk usaha seperti Agen Sembako. Aplikasi ini mendukung autentikasi pengguna dengan Firebase dan menyediakan antarmuka yang ramah pengguna.
+Aplikasi Kertasin adalah aplikasi mobile berbasis Flutter untuk pencatatan invoice digital dan pencatatan keuangan yang lebih efisien untuk usaha seperti Toko/Agen Sembako. Aplikasi ini mendukung autentikasi pengguna dengan Firebase dan menyediakan antarmuka yang ramah pengguna.
 
 ## Cara Instalasi dan Menjalankan Aplikasi
 1. Clone Repository
