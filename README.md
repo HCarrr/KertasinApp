@@ -42,5 +42,7 @@ Fitur Utama:
 - ├── test/             # Unit dan widget tests
 - ├── .vscode/          # Konfigurasi editor Visual Studio Code
 - ├── pubspec.yaml      # File konfigurasi proyek Flutter
+- ├── pubspec.lock      # Versi pasti dari dependensi yang digunakan
+- ├── analysis_options.yaml     # Aturan dan style linter Dart
 - ├── firebase.json     # Konfigurasi Firebase
 - └── README.md         # Dokumentasi proyek
