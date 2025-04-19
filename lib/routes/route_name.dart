@@ -1,8 +1,12 @@
-abstract class RouteName {
+abstract class RoutesName {
   static const homeScreen = "/homeScreen";
   static const loginPage = "/loginPage";
   static const invoicePenjualanPage = "/invoicePenjualanPage";
   static const invoicePembelianPage = "/invoicePembelianPage";
-  static const tambahInvoicePembelianPage = "/tambahInvoicePembelianPage";
-  static const tambahInvoicePenjualanPage = "/tambahInvoicePenjualanPage";
+
+  static String mainPage = "/mainPage";
+  static String barangPage = "/barangPage";
+  static String profilePage = "/profilePage";
+  static String historyPembelianPage = "/historyPembelianPage";
+
 }

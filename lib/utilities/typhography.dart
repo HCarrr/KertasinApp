@@ -7,6 +7,11 @@ class TStyle {
     fontSize: 35,
     fontWeight: FontWeight.bold,
   );
+  static const TextStyle titleWhite = TextStyle(
+      fontFamily: 'MuseoModerno',
+      fontSize: 35,
+      fontWeight: FontWeight.bold,
+      color: kColorPureWhite);
 
   static const TextStyle overline = TextStyle(
     fontFamily: 'Roboto',

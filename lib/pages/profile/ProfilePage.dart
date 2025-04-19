@@ -11,18 +11,17 @@ class ProfilPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Inisialisasi controller menggunakan GetX
     final ProfileController controller = Get.put(ProfileController());
 
     return Obx(() {
-      // Menampilkan loading indicator jika data belum tersedia
       if (controller.userData.value == null) {
         return const Center(child: CircularProgressIndicator());
       }
 
-      // Data tersedia, lanjutkan rendering UI
-      final userName = controller.userData.value?['name'] as String? ?? 'Unknown';
-      final userEmail = controller.userData.value?['email'] as String? ?? 'Unknown';
+      final userName =
+          controller.userData.value?['name'] as String? ?? 'Unknown';
+      final userEmail =
+          controller.userData.value?['email'] as String? ?? 'Unknown';
       final userRole = controller.userData.value?['role'] as String? ?? '';
 
       return Stack(
@@ -52,7 +51,8 @@ class ProfilPage extends StatelessWidget {
                             children: [
                               if (!controller.isEditing.value)
                                 IconButton(
-                                  icon: const Icon(Icons.edit, color: kColorPureWhite),
+                                  icon: const Icon(Icons.edit,
+                                      color: kColorPureWhite),
                                   onPressed: () {
                                     controller.toggleEditMode();
                                   },
@@ -60,13 +60,15 @@ class ProfilPage extends StatelessWidget {
                                 ),
                               if (controller.isEditing.value)
                                 IconButton(
-                                  icon: const Icon(Icons.save, color: kColorPureWhite),
+                                  icon: const Icon(Icons.save,
+                                      color: kColorPureWhite),
                                   onPressed: () {
                                     showDialog(
                                       context: context,
                                       builder: (context) => AlertDialog(
                                         title: const Text("Konfirmasi"),
-                                        content: const Text("Apakah Anda yakin ingin menyimpan perubahan?"),
+                                        content: const Text(
+                                            "Apakah Anda yakin ingin menyimpan perubahan?"),
                                         actions: [
                                           TextButton(
                                             onPressed: () {
@@ -100,7 +102,8 @@ class ProfilPage extends StatelessWidget {
                       // Bagian header yang tidak dipin (avatar, nama, email, role)
                       Container(
                         width: Get.width,
-                        padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 16.0),
+                        padding:
+                            const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 16.0),
                         decoration: BoxDecoration(
                           color: kColorFirst,
                           borderRadius: const BorderRadius.only(
@@ -136,7 +139,9 @@ class ProfilPage extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(12),
                                       ),
                                       child: Text(
-                                        userRole.isNotEmpty ? userRole : 'Role belum diisi',
+                                        userRole.isNotEmpty
+                                            ? userRole
+                                            : 'Role belum diisi',
                                         style: TStyle.caption.copyWith(
                                           color: kColorFirst,
                                         ),
@@ -147,7 +152,8 @@ class ProfilPage extends StatelessWidget {
                                 const SizedBox(width: 16),
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         userName,
@@ -206,7 +212,8 @@ class ProfilPage extends StatelessWidget {
                             ),
                             const SizedBox(height: 8),
                             LinearProgressIndicator(
-                              value: controller.completionPercentage.value / 100,
+                              value:
+                                  controller.completionPercentage.value / 100,
                               backgroundColor: Colors.grey[300],
                               valueColor: const AlwaysStoppedAnimation<Color>(
                                 kColorFirst,
@@ -232,7 +239,8 @@ class ProfilPage extends StatelessWidget {
                         child: Column(
                           children: [
                             Obx(() => TextFormField(
-                                  controller: controller.namaPerusahaanController,
+                                  controller:
+                                      controller.namaPerusahaanController,
                                   enabled: controller.isEditing.value,
                                   decoration: InputDecoration(
                                     labelText: "Nama Perusahaan",
@@ -247,11 +255,13 @@ class ProfilPage extends StatelessWidget {
                                     ),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12),
-                                      borderSide: const BorderSide(color: Colors.grey),
+                                      borderSide:
+                                          const BorderSide(color: Colors.grey),
                                     ),
                                     disabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12),
-                                      borderSide: const BorderSide(color: Colors.grey),
+                                      borderSide:
+                                          const BorderSide(color: Colors.grey),
                                     ),
                                   ),
                                 )),
@@ -272,11 +282,13 @@ class ProfilPage extends StatelessWidget {
                                     ),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12),
-                                      borderSide: const BorderSide(color: Colors.grey),
+                                      borderSide:
+                                          const BorderSide(color: Colors.grey),
                                     ),
                                     disabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12),
-                                      borderSide: const BorderSide(color: Colors.grey),
+                                      borderSide:
+                                          const BorderSide(color: Colors.grey),
                                     ),
                                   ),
                                 )),
@@ -297,11 +309,13 @@ class ProfilPage extends StatelessWidget {
                                     ),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12),
-                                      borderSide: const BorderSide(color: Colors.grey),
+                                      borderSide:
+                                          const BorderSide(color: Colors.grey),
                                     ),
                                     disabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12),
-                                      borderSide: const BorderSide(color: Colors.grey),
+                                      borderSide:
+                                          const BorderSide(color: Colors.grey),
                                     ),
                                   ),
                                 )),
@@ -341,11 +355,13 @@ class ProfilPage extends StatelessWidget {
                                     ),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12),
-                                      borderSide: const BorderSide(color: Colors.grey),
+                                      borderSide:
+                                          const BorderSide(color: Colors.grey),
                                     ),
                                     disabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12),
-                                      borderSide: const BorderSide(color: Colors.grey),
+                                      borderSide:
+                                          const BorderSide(color: Colors.grey),
                                     ),
                                   ),
                                 )),
@@ -366,11 +382,13 @@ class ProfilPage extends StatelessWidget {
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12),
-                                  borderSide: const BorderSide(color: Colors.grey),
+                                  borderSide:
+                                      const BorderSide(color: Colors.grey),
                                 ),
                                 disabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12),
-                                  borderSide: const BorderSide(color: Colors.grey),
+                                  borderSide:
+                                      const BorderSide(color: Colors.grey),
                                 ),
                               ),
                             ),
@@ -405,54 +423,6 @@ class ProfilPage extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
-            bottomNavigationBar: Container(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              decoration: BoxDecoration(
-                color: kColorFirst,
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    offset: const Offset(0, -1),
-                    blurRadius: 4,
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Get.off(() => Homescreen());
-                    },
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.home, color: kColorPureWhite, size: 28),
-                        const SizedBox(height: 4),
-                        Text("Home", style: TStyle.captionWhite),
-                      ],
-                    ),
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.receipt_long, color: kColorPureWhite, size: 28),
-                      const SizedBox(height: 4),
-                      Text("Pencatatan", style: TStyle.captionWhite),
-                    ],
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.person, color: kColorPureBlack, size: 28),
-                      const SizedBox(height: 4),
-                      Text("Profil", style: TStyle.captionWhite.copyWith(color: kColorPureBlack)),
-                    ],
-                  ),
-                ],
-              ),
             ),
           ),
           Obx(() => controller.isLoading.value
@@ -501,7 +471,8 @@ class ProfilPage extends StatelessWidget {
               onChanged: controller.isEditing.value
                   ? (String? newValue) {
                       controller.selectedRole.value = newValue;
-                      controller.showRoleManualField.value = newValue == 'Lainnya';
+                      controller.showRoleManualField.value =
+                          newValue == 'Lainnya';
                       if (!controller.showRoleManualField.value) {
                         controller.roleManualController.clear();
                       }
@@ -510,7 +481,8 @@ class ProfilPage extends StatelessWidget {
                     }
                   : null,
             ),
-            if (controller.showRoleManualField.value && controller.isEditing.value) ...[
+            if (controller.showRoleManualField.value &&
+                controller.isEditing.value) ...[
               const SizedBox(height: 16),
               TextFormField(
                 controller: controller.roleManualController,
@@ -519,7 +491,8 @@ class ProfilPage extends StatelessWidget {
                   controller.calculateAndUpdateCompletion();
                 },
                 inputFormatters: [
-                  LengthLimitingTextInputFormatter(ProfileController.maxRoleLength),
+                  LengthLimitingTextInputFormatter(
+                      ProfileController.maxRoleLength),
                 ],
                 decoration: InputDecoration(
                   labelText: "Masukkan Role",
