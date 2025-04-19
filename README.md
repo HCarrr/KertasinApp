@@ -16,7 +16,7 @@ Note: Untuk login via Google Sign In memerlukan SHA1 Key untuk didaftarkan pada 
 
 ## Fitur dan Teknologi
 Fitur Utama:
-1. Autentikasi Pengguna: Registrasi, login, dan reset password menggunakan Firebase Authentication yang terintegrasi Google Sign In.
+1. Autentikasi Pengguna: Registrasi, login, dan reset password menggunakan Firebase Authentication.
 2. Antarmuka Responsif: Desain UI yang konsisten untuk semua halaman.
 3. Manajemen Data: Pencatatan Biaya, History Invoice Pembelian, History Invoice Penjualan, Data Barang, Total Pengeluaran, Total Pemasukan.
 
