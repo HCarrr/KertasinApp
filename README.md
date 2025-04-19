@@ -8,7 +8,7 @@ Aplikasi Kertasin adalah aplikasi mobile berbasis Flutter untuk pencatatan invoi
 - Pada terminal, Jalankan perintah "flutter pub get"
 3. Jalankan Aplikasi
 - Hubungkan perangkat atau jalankan emulator/simulator. Jalankan aplikasi dengan perintah "flutter run"
-- (Opsional) Untuk build release, jalankan perintah pada terminal:
+4. (Opsional) Untuk build release, jalankan perintah pada terminal:
 - flutter build apk --release # Untuk Android
 - flutter build ios --release # Untuk iOS
 
