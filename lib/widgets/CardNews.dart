@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:kertasinapp/utilities/assets_constants.dart';
 
 import '../utilities/colors.dart';
 import '../utilities/typhography.dart';
@@ -22,7 +23,7 @@ class CardNews extends StatelessWidget {
             color: Colors.grey.withValues(alpha: 0.2),
             spreadRadius: 5,
             blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
+            offset: Offset(0, 3),
           ),
         ],
       ),
@@ -33,10 +34,17 @@ class CardNews extends StatelessWidget {
             width: Get.width * 0.3,
             height: Get.height,
             decoration: BoxDecoration(
-                color: kColorGrey,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(16),
-                    bottomLeft: Radius.circular(16))),
+              color: kColorGrey,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(16),
+                bottomLeft: Radius.circular(16),
+              ),
+            ),
+            clipBehavior: Clip.hardEdge,
+            child: Image.asset(
+              AssetsConstant.imgNews,
+              fit: BoxFit.cover,
+            ),
           ),
           Expanded(
             child: Padding(
@@ -50,7 +58,7 @@ class CardNews extends StatelessWidget {
                   ),
                   SizedBox(height: 8),
                   SizedBox(
-                    width: Get.width * 0.6, // Atur lebar agar teks bisa wrap
+                    width: Get.width * 0.6,
                     child: Text(
                       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus porta mollis suscipit. Donec laoreet laoreet ante, et porta urna faucibus in. Nulla facilisi. Nam dictum augue quis convallis suscipit. Nulla dignissim volutpat magna, in vulputate nisi.",
                       style: TStyle.caption,

@@ -71,6 +71,8 @@ flutter:
     - assets/img/ilustrationInvoice.png
     - assets/img/iklan2.svg
     - assets/img/suu.svg
+    - assets/img/notif_bg.svg
+    - assets/img/imgNews.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
