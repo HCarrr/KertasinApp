@@ -3,14 +3,14 @@ Aplikasi Kertasin adalah aplikasi mobile berbasis Flutter untuk pencatatan invoi
 
 ## Cara Instalasi dan Menjalankan Aplikasi
 1. Clone Repository
-- Buka terminal, ketik "git clone https://github.com/HCarrr/KertasinApp.git"
+- Buka terminal, ketik: ```git clone https://github.com/HCarrr/KertasinApp.git```
 2. Instal Dependensi
-- Pada terminal, Jalankan perintah "flutter pub get"
+- Pada terminal, Jalankan perintah: ```flutter pub get```
 3. Jalankan Aplikasi
-- Hubungkan perangkat atau jalankan emulator/simulator. Jalankan aplikasi dengan perintah "flutter run"
+- Hubungkan perangkat atau jalankan emulator/simulator. Jalankan aplikasi dengan perintah: ```flutter run```
 4. (Opsional) Untuk build release, jalankan perintah pada terminal:
-- flutter build apk --release # Untuk Android
-- flutter build ios --release # Untuk iOS
+- ```flutter build apk --release # Untuk Android```
+- ```flutter build ios --release # Untuk iOS```
 
 Note: Untuk login cepat via Google Sign In memerlukan SHA1 Key untuk didaftarkan pada firebase. Jika ingin ditest login melalui Google Sign In, bisa japri ke WA 08159827491 untuk didaftarkan SHA1 Key nya.
 
@@ -29,10 +29,13 @@ Fitur Utama:
 - GetX: Manajemen state dan navigasi yang ringan.
 
 ## Struktur Folder
+```
 KertasinApp
 ├── .dart_tool
 │   ├── dartpad
 │   │   └── web_plugin_registrant.dart
+│   ├── extension_discovery
+│   │   └── vs_code.json
 │   ├── flutter_build
 │   ├── package_config.json
 │   ├── package_config_subset
@@ -426,3 +429,4 @@ KertasinApp
         ├── utils.h
         ├── win32_window.cpp
         └── win32_window.h
+```
