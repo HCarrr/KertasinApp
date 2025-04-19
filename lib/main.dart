@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:kertasinapp/controllers/home/user_controller.dart';
@@ -21,16 +22,47 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // Fungsi untuk menentukan rute awal berdasarkan status login
+  Future<String> _getInitialRoute() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      // Pastikan pengguna sudah diverifikasi emailnya
+      await user.reload();
+      if (user.emailVerified) {
+        return RoutesName.mainPage; // Pengguna sudah login dan email terverifikasi
+      } else {
+        return RoutesName.loginPage; // Email belum terverifikasi
+      }
+    }
+    return RoutesName.loginPage; // Pengguna belum login
+  }
+
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Kertasin App',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: kColorPureWhite,
-      ),
-      initialRoute: RoutesName.loginPage,
-      getPages: PagesRoute.pages,
+    return FutureBuilder<String>(
+      future: _getInitialRoute(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
+          return GetMaterialApp(
+            title: 'Kertasin App',
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              scaffoldBackgroundColor: kColorPureWhite,
+            ),
+            initialRoute: snapshot.data!,
+            getPages: PagesRoute.pages,
+          );
+        }
+        // Tampilkan loading screen sementara menunggu cek status login
+        return MaterialApp(
+          home: Scaffold(
+            backgroundColor: kColorPureWhite,
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
+        );
+      },
     );
   }
 }
