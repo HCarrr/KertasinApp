@@ -22,19 +22,17 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // Fungsi untuk menentukan rute awal berdasarkan status login
   Future<String> _getInitialRoute() async {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      // Pastikan pengguna sudah diverifikasi emailnya
       await user.reload();
       if (user.emailVerified) {
-        return RoutesName.mainPage; // Pengguna sudah login dan email terverifikasi
+        return RoutesName.mainPage;
       } else {
-        return RoutesName.loginPage; // Email belum terverifikasi
+        return RoutesName.loginPage;
       }
     }
-    return RoutesName.loginPage; // Pengguna belum login
+    return RoutesName.loginPage;
   }
 
   @override
@@ -42,7 +40,8 @@ class MyApp extends StatelessWidget {
     return FutureBuilder<String>(
       future: _getInitialRoute(),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
+        if (snapshot.connectionState == ConnectionState.done &&
+            snapshot.hasData) {
           return GetMaterialApp(
             title: 'Kertasin App',
             debugShowCheckedModeBanner: false,
@@ -53,7 +52,6 @@ class MyApp extends StatelessWidget {
             getPages: PagesRoute.pages,
           );
         }
-        // Tampilkan loading screen sementara menunggu cek status login
         return MaterialApp(
           home: Scaffold(
             backgroundColor: kColorPureWhite,
