@@ -29,21 +29,21 @@ Fitur Utama:
 - GetX: Manajemen state dan navigasi yang ringan.
 
 ## Struktur Folder
-KertasinApp/
-├── android/          # Konfigurasi untuk platform Android
-├── ios/              # Konfigurasi untuk platform iOS
-├── lib/              # Kode sumber utama aplikasi (Dart)
-├── assets/           # Aset seperti gambar dan ikon
-├── fonts/            # File font kustom
-├── web/              # Konfigurasi untuk platform Web
-├── windows/          # Konfigurasi untuk platform Windows
-├── macos/            # Konfigurasi untuk platform macOS
-├── linux/            # Konfigurasi untuk platform Linux
-├── test/             # Unit dan widget tests
-├── .vscode/          # Konfigurasi editor Visual Studio Code
-├── pubspec.yaml      # File konfigurasi proyek Flutter
-├── firebase.json     # Konfigurasi Firebase
-└── README.md         # Dokumentasi proyek
+- KertasinApp/
+- ├── android/          # Konfigurasi untuk platform Android
+- ├── ios/              # Konfigurasi untuk platform iOS
+- ├── lib/              # Kode sumber utama aplikasi (Dart)
+- ├── assets/           # Aset seperti gambar dan ikon
+- ├── fonts/            # File font kustom
+- ├── web/              # Konfigurasi untuk platform Web
+- ├── windows/          # Konfigurasi untuk platform Windows
+- ├── macos/            # Konfigurasi untuk platform macOS
+- ├── linux/            # Konfigurasi untuk platform Linux
+- ├── test/             # Unit dan widget tests
+- ├── .vscode/          # Konfigurasi editor Visual Studio Code
+- ├── pubspec.yaml      # File konfigurasi proyek Flutter
+- ├── firebase.json     # Konfigurasi Firebase
+- └── README.md         # Dokumentasi proyek
 
 
 For help getting started with Flutter development, view the
