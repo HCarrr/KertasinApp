@@ -34,6 +34,7 @@ class PencatatanBiayaPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: kColorPureWhite,
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             padding: EdgeInsets.only(
@@ -133,34 +134,46 @@ class PencatatanBiayaPage extends StatelessWidget {
           ),
           SizedBox(height: 20),
           Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Obx(() {
-              final historyList = [
-                ...penjualanController.invoices.map((e) => {
-                      ...e,
-                      'tipe': 'Pemasukan',
-                    }),
-                ...pembelianController.invoices.map((e) => {
-                      ...e,
-                      'tipe': 'Pengeluaran',
-                    }),
-              ]..sort((a, b) {
-                  final aDate = a['tanggal'] as Timestamp?;
-                  final bDate = b['tanggal'] as Timestamp?;
-                  return bDate!.compareTo(aDate!);
-                });
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text("History",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 8),
-                  ...historyList.map((item) => _buildHistoryItem(item)).toList()
-                ],
-              );
-            }),
-          )
+            padding: const EdgeInsets.only(left: 16),
+            child: const Text("History",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Obx(() {
+                final historyList = [
+                  ...penjualanController.invoices.map((e) => {
+                        ...e,
+                        'tipe': 'Pemasukan',
+                      }),
+                  ...pembelianController.invoices.map((e) => {
+                        ...e,
+                        'tipe': 'Pengeluaran',
+                      }),
+                ]..sort((a, b) {
+                    final aDate = a['tanggal'] as Timestamp?;
+                    final bDate = b['tanggal'] as Timestamp?;
+                    return bDate!.compareTo(aDate!);
+                  });
+                return SingleChildScrollView(
+                  controller: ScrollController(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 8),
+                      ...historyList
+                          .map((item) => _buildHistoryItem(item))
+                          .toList(),
+                      SizedBox(
+                        height: Get.height * 0.2,
+                      )
+                    ],
+                  ),
+                );
+              }),
+            ),
+          ),
         ],
       ),
     );

@@ -29,12 +29,6 @@ class ProductButtonController extends GetxController {
           Get.toNamed(RoutesName.barangPage);
         },
       },
-      {
-        'text': 'Pencatatan Biaya',
-        'onTap': () {
-          // action
-        },
-      },
     ]);
     super.onInit();
   }

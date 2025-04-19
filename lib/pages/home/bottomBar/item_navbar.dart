@@ -37,8 +37,8 @@ class ItemNavbar extends StatelessWidget {
               Text(
                 model.title,
                 style: TStyle.appbar.copyWith(
-                  color: isActive ? kColorMediumGrey : kColorPureWhite,
-                ),
+                    color: isActive ? kColorMediumGrey : kColorPureWhite,
+                    fontSize: 11),
               ),
             ],
           ),
