@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kertasinapp/controllers/invoicePembelianController.dart';
-import 'package:kertasinapp/pages/invoice/TambahInvoicePembelianPage.dart';
+import 'package:kertasinapp/controllers/invoicePenjualanController.dart';
+import 'package:kertasinapp/pages/invoice/tambahInvoicePenjualanPage.dart';
 import 'package:kertasinapp/utilities/assets_constants.dart';
 import 'package:kertasinapp/utilities/colors.dart';
 import 'package:kertasinapp/utilities/typhography.dart';
 
-class InvoicePembelianPage extends StatelessWidget {
-  const InvoicePembelianPage({super.key});
+class InvoicePenjualanPage extends StatelessWidget {
+  const InvoicePenjualanPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(InvoicePembelianController());
+    final controller = Get.put(InvoicePenjualanController());
 
     return Scaffold(
       backgroundColor: kColorPureWhite,
@@ -48,7 +48,7 @@ class InvoicePembelianPage extends StatelessWidget {
                       color: kColorPureWhite,
                     ),
                     Text(
-                      "Invoice Pembelian",
+                      "Invoice Penjualan",
                       style: TStyle.headline4,
                     ),
                     Spacer(),
@@ -73,7 +73,7 @@ class InvoicePembelianPage extends StatelessWidget {
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text(
-                          "buat invoice pembelian disini untuk mencatat pembelian barang",
+                          "buat invoice penjualan disini untuk membantu usaha kamu",
                           style: TStyle.captionWhite,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
@@ -90,10 +90,9 @@ class InvoicePembelianPage extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: ElevatedButton(
                       onPressed: () async {
-                        final result = await Get.to(() => TambahInvoicePembelianPage());
+                        final result = await Get.to(() => TambahInvoicePenjualanPage());
                         if (result == true) {
-                          print('Returned from TambahInvoicePembelianPage, restarting stream');
-                          controller.refreshData();
+                          controller.restartStream();
                         }
                       },
                       style: ElevatedButton.styleFrom(
@@ -119,10 +118,7 @@ class InvoicePembelianPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "History",
-                  style: TStyle.headline3,
-                ),
+                Text("History", style: TStyle.headline3),
                 Icon(Icons.chevron_right_rounded, size: 28),
               ],
             ),
@@ -131,15 +127,13 @@ class InvoicePembelianPage extends StatelessWidget {
           Expanded(
             child: Obx(() {
               if (controller.isLoading.value) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
+                return Center(child: CircularProgressIndicator());
               } else if (controller.invoices.isEmpty) {
                 return Center(
                   child: Padding(
                     padding: const EdgeInsets.all(24.0),
                     child: Text(
-                      "Belum ada riwayat invoice pembelian",
+                      "Belum ada riwayat invoice penjualan",
                       style: TStyle.body2.copyWith(color: kColorGrey),
                       textAlign: TextAlign.center,
                     ),
@@ -151,9 +145,8 @@ class InvoicePembelianPage extends StatelessWidget {
                   itemCount: controller.invoices.length,
                   itemBuilder: (context, index) {
                     final invoice = controller.invoices[index];
-                    print('Rendering invoice: ${invoice['id']}');
                     return _buildHistoryItem(
-                      invoice['nomorInvoice'] ?? 'INV-Unknown',
+                      invoice['nomorInvoice'] ?? 'INV-SALE-N/A',
                       controller.formatDate(invoice['tanggal']),
                       invoice['totalItem']?.toString() ?? '0',
                       controller.formatHarga(invoice['totalHarga']),
@@ -179,25 +172,13 @@ class InvoicePembelianPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "No. Invoice: $nomorInvoice",
-            style: TStyle.body2.copyWith(color: kColorGrey),
-          ),
+          Text("No. Invoice: $nomorInvoice", style: TStyle.body2.copyWith(color: kColorGrey)),
           SizedBox(height: 4),
-          Text(
-            "Tanggal: $tanggal",
-            style: TStyle.body2.copyWith(color: kColorGrey),
-          ),
+          Text("Tanggal: $tanggal", style: TStyle.body2.copyWith(color: kColorGrey)),
           SizedBox(height: 4),
-          Text(
-            "Total item: $totalItem",
-            style: TStyle.body2.copyWith(color: kColorGrey),
-          ),
+          Text("Total item: $totalItem", style: TStyle.body2.copyWith(color: kColorGrey)),
           SizedBox(height: 4),
-          Text(
-            "Total harga: Rp. $totalHarga",
-            style: TStyle.body2.copyWith(color: kColorGrey),
-          ),
+          Text("Total harga: Rp. $totalHarga", style: TStyle.body2.copyWith(color: kColorGrey)),
         ],
       ),
     );

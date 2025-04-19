@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:kertasinapp/pages/invoice/InvoicePembelianPage.dart';
+import 'package:kertasinapp/pages/invoice/InvoicePenjualanPage.dart';
 import 'package:kertasinapp/pages/login/LoginPage.dart';
 
 class ProductButtonController extends GetxController {
@@ -10,11 +11,11 @@ class ProductButtonController extends GetxController {
     productButtons.assignAll([
       {
         'text': 'Invoice Pembelian',
-        'onTap': () => Get.to(() => const LoginPage()),
+        'onTap': () => Get.to(() => const InvoicePembelianPage()),
       },
       {
         'text': 'Invoice Penjualan',
-        'onTap': () => Get.to(() => const InvoicePembelianPage()),
+        'onTap': () => Get.to(() => const InvoicePenjualanPage()),
       },
       {
         'text': 'Pencatatan Biaya',
