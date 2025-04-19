@@ -59,7 +59,7 @@ class Homescreen extends StatelessWidget {
                 SizedBox(height: Get.height * 0.06),
                 Obx(
                   () => Text(
-                    "Hi ${userController.userName.value}, welcome to",
+                    "Hi ${userController.userName.value.split(' ').first}, welcome to",
                     style: TStyle.subtitle1.copyWith(color: kColorPureWhite),
                   ),
                 ),
@@ -95,7 +95,7 @@ class Homescreen extends StatelessWidget {
                 Text("Produk   >>", style: TStyle.body1),
                 const SizedBox(height: 16),
                 Obx(() => SizedBox(
-                      height: Get.height * 0.04,
+                      height: Get.height * 0.05,
                       child: ListView.separated(
                         scrollDirection: Axis.horizontal,
                         itemCount: controller.productButtons.length,
@@ -121,6 +121,7 @@ class Homescreen extends StatelessWidget {
                 CardNews(),
                 CardNews(),
                 CardNews(),
+                SizedBox(height: Get.height * 0.1),
               ],
             ),
           ),

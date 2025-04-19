@@ -166,7 +166,7 @@ class PencatatanBiayaPage extends StatelessWidget {
                           .map((item) => _buildHistoryItem(item))
                           .toList(),
                       SizedBox(
-                        height: Get.height * 0.2,
+                        height: Get.height * 0.1,
                       )
                     ],
                   ),
@@ -252,7 +252,6 @@ class PencatatanBiayaPage extends StatelessWidget {
         children: [
           Text("Nama Biaya : ${item['nomorInvoice']}",
               style: const TextStyle(fontWeight: FontWeight.bold)),
-          Text("Catatan Biaya : -"), // Kalau mau bisa ambil catatan juga
           Text(
               "Total Biaya : Rp ${numberFormat.format(item['totalHarga']).replaceAll(',', '.')}"),
           const SizedBox(height: 4),
