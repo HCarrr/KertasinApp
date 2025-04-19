@@ -12,7 +12,7 @@ Aplikasi Kertasin adalah aplikasi mobile berbasis Flutter untuk pencatatan invoi
 - flutter build apk --release # Untuk Android
 - flutter build ios --release # Untuk iOS
 
-Note: Untuk login via Google Sign In memerlukan SHA1 Key untuk didaftarkan pada firebase. Jika ingin ditest login melalui Google Sign In, bisa japri ke WA 08159827491 untuk didaftarkan SHA1 Key nya.
+Note: Untuk login cepat via Google Sign In memerlukan SHA1 Key untuk didaftarkan pada firebase. Jika ingin ditest login melalui Google Sign In, bisa japri ke WA 08159827491 untuk didaftarkan SHA1 Key nya.
 
 ## Fitur dan Teknologi
 Fitur Utama:
