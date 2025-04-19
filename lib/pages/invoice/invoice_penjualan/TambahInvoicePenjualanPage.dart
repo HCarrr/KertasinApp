@@ -216,7 +216,7 @@ class TambahInvoicePenjualanPage extends StatelessWidget {
                         return ListTile(
                           title: Text(barang.nama, style: TStyle.subtitle2),
                           subtitle: Text(
-                            "Stok: ${barang.stok} | Harga: Rp ${controller.formatNumber(barang.harga)}",
+                            "Stok: ${barang.stok} | Harga: Rp ${controller.formatNumber(barang.hargaJual)}",
                             style: TStyle.caption,
                           ),
                           onTap: () {
@@ -257,7 +257,7 @@ class TambahInvoicePenjualanPage extends StatelessWidget {
               ),
               SizedBox(height: 16),
               Text(
-                "Harga: Rp ${controller.formatNumber(barang.harga)} / unit",
+                "Harga: Rp ${controller.formatNumber(barang.hargaJual)} / unit",
                 style: TStyle.body2.copyWith(color: kColorGrey),
               ),
               Text(
@@ -295,7 +295,7 @@ class TambahInvoicePenjualanPage extends StatelessWidget {
                       final success = await controller.addItem(InvoiceItem(
                         nama: barang.nama,
                         jumlah: jumlah,
-                        harga: barang.harga,
+                        hargaJual: barang.hargaJual,
                       ));
 
                       if (success) {
@@ -454,12 +454,12 @@ class TambahInvoicePenjualanPage extends StatelessWidget {
                 ),
                 SizedBox(height: 4),
                 Text(
-                  "Rp ${controller.formatNumber(item.harga)} / unit",
+                  "Rp ${controller.formatNumber(item.hargaJual)} / unit",
                   style: TStyle.body2.copyWith(color: kColorGrey),
                 ),
                 SizedBox(height: 4),
                 Text(
-                  "Subtotal: Rp ${controller.formatNumber(item.harga * item.jumlah)}",
+                  "Subtotal: Rp ${controller.formatNumber(item.hargaJual * item.jumlah)}",
                   style: TStyle.subtitle2,
                 ),
               ],

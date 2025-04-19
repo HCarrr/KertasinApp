@@ -9,13 +9,13 @@ import 'package:kertasinapp/utilities/colors.dart';
 class Barang {
   final String id;
   final String nama;
-  final double harga;
+  final double hargaJual;
   final int stok;
 
   Barang({
     required this.id,
     required this.nama,
-    required this.harga,
+    required this.hargaJual,
     required this.stok,
   });
 
@@ -24,7 +24,7 @@ class Barang {
     return Barang(
       id: doc.id,
       nama: data['nama'] ?? '',
-      harga: (data['harga'] ?? 0).toDouble(),
+      hargaJual: (data['hargaJual'] ?? 0).toDouble(),
       stok: data['stok'] ?? 0,
     );
   }
@@ -33,12 +33,12 @@ class Barang {
 class InvoiceItem {
   String nama;
   int jumlah;
-  double harga;
+  double hargaJual;
 
   InvoiceItem({
     required this.nama,
     required this.jumlah,
-    required this.harga,
+    required this.hargaJual,
   });
 }
 
@@ -71,7 +71,7 @@ class TambahInvoicePenjualanController extends GetxController {
   }
 
   double get totalHarga =>
-      items.fold(0, (sum, item) => sum + (item.harga * item.jumlah));
+      items.fold(0, (sum, item) => sum + (item.hargaJual * item.jumlah));
 
   String formatNumber(double number) {
     return numberFormat.format(number.floor()).replaceAll(',', '.');
@@ -113,7 +113,7 @@ class TambahInvoicePenjualanController extends GetxController {
         items[existingIndex] = InvoiceItem(
           nama: existingItem.nama,
           jumlah: existingItem.jumlah + item.jumlah,
-          harga: existingItem.harga,
+          hargaJual: existingItem.hargaJual,
         );
       } else {
         items.add(item);
@@ -216,8 +216,8 @@ class TambahInvoicePenjualanController extends GetxController {
             .map((item) => {
                   'nama': item.nama,
                   'jumlah': item.jumlah,
-                  'harga': item.harga,
-                  'subtotal': item.harga * item.jumlah,
+                  'hargaJual': item.hargaJual,
+                  'subtotal': item.hargaJual * item.jumlah,
                 })
             .toList(),
       };
