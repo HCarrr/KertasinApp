@@ -41,6 +41,7 @@ dependencies:
   google_sign_in: ^6.3.0
   flutter_svg: ^2.0.17
   intl: ^0.20.2
+  flutter_native_splash: ^2.4.4
 
 
 dev_dependencies:
@@ -74,6 +75,7 @@ flutter:
     - assets/img/suu.svg
     - assets/img/notif_bg.svg
     - assets/img/imgNews.jpg
+    - assets/img/splashIcon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -125,3 +127,9 @@ flutter:
   
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+flutter_native_splash:
+    color: "#ffffff"
+    image: assets/img/splashIcon.png
+    android: true
+    ios: true

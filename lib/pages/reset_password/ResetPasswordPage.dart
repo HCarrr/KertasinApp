@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kertasinapp/controllers/loginController.dart';
-import 'package:kertasinapp/pages/register/RegisterPage.dart';
-import 'package:kertasinapp/pages/reset_password/ResetPasswordPage.dart';
-import 'package:kertasinapp/utilities/assets_constants.dart';
+import 'package:kertasinapp/controllers/resetPasswordController.dart';
 import 'package:kertasinapp/utilities/colors.dart';
 import 'package:kertasinapp/utilities/typhography.dart';
 import 'package:kertasinapp/widgets/ButtonDefault.dart';
 import 'package:kertasinapp/widgets/CustomeTextField.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class ResetPasswordPage extends StatelessWidget {
+  const ResetPasswordPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     // Inisialisasi controller menggunakan GetX
-    final LoginController controller = Get.put(LoginController());
+    final ResetPasswordController controller = Get.put(ResetPasswordController());
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -67,7 +64,7 @@ class LoginPage extends StatelessWidget {
             children: [
               const Spacer(),
               Text(
-                "Log In",
+                "Reset Password",
                 style: TStyle.title,
               ),
               Container(
@@ -81,55 +78,42 @@ class LoginPage extends StatelessWidget {
                   padding: const EdgeInsets.all(16.0),
                   child: Obx(() => Column(
                         children: [
-                          if (!controller.showVerificationMessage.value) ...[
+                          if (!controller.showSuccessMessage.value) ...[
                             CustomTextField(
                               hintText: 'Email',
                               controller: controller.emailController,
                             ),
-                            CustomTextField(
-                              hintText: 'Password',
-                              isPassword: true,
-                              controller: controller.passwordController,
-                            ),
                             const SizedBox(height: 16),
-                            Buttondefault(
-                              text: "Login",
-                              onTap: controller.login,
-                            ),
-                            const SizedBox(height: 16),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                            Stack(
+                              alignment: Alignment.center,
                               children: [
-                                Text(
-                                  "Belum punya akun?",
-                                  style: TStyle.textChat,
+                                Buttondefault(
+                                  text: "Kirim Link Reset Password",
+                                  onTap: controller.isLoading.value
+                                      ? null
+                                      : controller.resetPassword,
                                 ),
-                                InkWell(
-                                  onTap: () {
-                                    Get.to(() => const RegisterPage());
-                                  },
-                                  child: Text(
-                                    " Register",
-                                    style: TStyle.textChat
-                                        .copyWith(color: kColorPrimary),
+                                if (controller.isLoading.value)
+                                  const CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        kColorPrimary),
                                   ),
-                                ),
                               ],
                             ),
-                            const SizedBox(height: 8),
+                            const SizedBox(height: 16),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "Lupa kata sandi?",
+                                  "Kembali ke",
                                   style: TStyle.textChat,
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    Get.to(() => const ResetPasswordPage());
+                                    Get.back();
                                   },
                                   child: Text(
-                                    " Reset Password",
+                                    " Login",
                                     style: TStyle.textChat
                                         .copyWith(color: kColorPrimary),
                                   ),
@@ -138,34 +122,45 @@ class LoginPage extends StatelessWidget {
                             ),
                           ] else ...[
                             Text(
-                              "Verifikasi Email Anda",
+                              "Link Reset Password Terkirim",
                               style: TStyle.subtitle1
                                   .copyWith(color: kColorDarkGrey),
                               textAlign: TextAlign.center,
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              "Email Anda (${controller.emailController.text}) belum diverifikasi. Silakan cek inbox atau spam folder Anda.",
+                              "Link reset password telah dikirim ke (${controller.emailController.text}). Silakan cek inbox atau spam folder Anda.",
                               style: TStyle.body2,
                               textAlign: TextAlign.center,
                             ),
                             const SizedBox(height: 16),
-                            Buttondefault(
-                              text: "Kirim Ulang Email Verifikasi",
-                              onTap: controller.resendVerificationEmail,
+                            Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Buttondefault(
+                                  text: "Kirim Ulang Link",
+                                  onTap: controller.isLoading.value
+                                      ? null
+                                      : controller.resetPassword,
+                                ),
+                                if (controller.isLoading.value)
+                                  const CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        kColorPrimary),
+                                  ),
+                              ],
                             ),
                             const SizedBox(height: 16),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "Email sudah terverifikasi?",
+                                  "Kembali ke",
                                   style: TStyle.textChat,
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    controller.showVerificationMessage.value =
-                                        false;
+                                    Get.back();
                                   },
                                   child: Text(
                                     " Login",
@@ -181,38 +176,10 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               Obx(() => SizedBox(
-                    height: controller.showVerificationMessage.value
-                        ? Get.height *
-                            0.2 // Tinggi untuk tampilan Kirim Ulang Verifikasi
-                        : Get.height * 0.1, // Tinggi untuk tampilan Login
+                    height: controller.showSuccessMessage.value
+                        ? Get.height * 0.2
+                        : Get.height * 0.1,
                   )),
-              Obx(() => !controller.showVerificationMessage.value
-                  ? Column(
-                      children: [
-                        Text(
-                          "atau Login Cepat dengan",
-                          style: TStyle.textChat,
-                        ),
-                        Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            IconButton(
-                              onPressed: controller.handleGoogleSignIn,
-                              icon: Image.asset(
-                                AssetsConstant.icGoogle,
-                                width: 46,
-                                height: 46,
-                                errorBuilder: (context, error, stackTrace) =>
-                                    const Icon(Icons.error),
-                              ),
-                            ),
-                            if (controller.isLoading.value)
-                              const CircularProgressIndicator(),
-                          ],
-                        ),
-                      ],
-                    )
-                  : const SizedBox.shrink()),
               const SizedBox(height: 26),
               Container(
                 height: Get.height * 0.06,

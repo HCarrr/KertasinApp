@@ -50,6 +50,14 @@ class Homescreen extends StatelessWidget {
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(24),
             ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: Offset(0, 3),
+              ),
+            ],
           ),
           child: Padding(
             padding: const EdgeInsets.all(18.0),
