@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kertasinapp/controllers/tambahInvoicePembelianController.dart';
+import 'package:kertasinapp/controllers/invoice/invoice_pembelian/tambahInvoicePembelianController.dart';
 import 'package:kertasinapp/utilities/colors.dart';
 import 'package:kertasinapp/utilities/typhography.dart';
 
@@ -196,16 +196,17 @@ class TambahInvoicePembelianPage extends StatelessWidget {
                 borderSide: const BorderSide(color: kColorFirst, width: 2),
               ),
               prefixIcon: const Icon(Icons.search, color: kColorGrey),
-              suffixIcon: Obx(() => controller.searchQueryBarang.value.isNotEmpty
-                  ? IconButton(
-                      icon: const Icon(Icons.clear, color: kColorGrey),
-                      onPressed: () {
-                        searchBarangController.clear();
-                        controller.searchQueryBarang.value = '';
-                        controller.searchResultsBarang.clear();
-                      },
-                    )
-                  : const SizedBox.shrink()),
+              suffixIcon:
+                  Obx(() => controller.searchQueryBarang.value.isNotEmpty
+                      ? IconButton(
+                          icon: const Icon(Icons.clear, color: kColorGrey),
+                          onPressed: () {
+                            searchBarangController.clear();
+                            controller.searchQueryBarang.value = '';
+                            controller.searchResultsBarang.clear();
+                          },
+                        )
+                      : const SizedBox.shrink()),
             ),
           ),
           Obx(() {
@@ -231,13 +232,8 @@ class TambahInvoicePembelianPage extends StatelessWidget {
                       onPressed: () {
                         final nama = searchBarangController.text.trim();
                         if (nama.isEmpty) {
-                          Get.snackbar(
-                            'Error',
-                            'Nama barang tidak boleh kosong',
-                            backgroundColor: kColorFourth.withOpacity(0.8),
-                            colorText: kColorPureWhite,
-                            snackPosition: SnackPosition.BOTTOM,
-                          );
+                          showErrorSnackbarFromTop(
+                              'Error, \nNama barang tidak boleh kosong');
                           return;
                         }
                         controller.searchResultsBarang.clear();
@@ -294,12 +290,8 @@ class TambahInvoicePembelianPage extends StatelessWidget {
                     onPressed: () {
                       final nama = searchBarangController.text.trim();
                       if (nama.isEmpty) {
-                        Get.snackbar(
-                          'Error',
-                          'Nama barang tidak boleh kosong',
-                          backgroundColor: kColorFourth.withOpacity(0.8),
-                          colorText: kColorPureWhite,
-                          snackPosition: SnackPosition.BOTTOM,
+                        showErrorSnackbarFromTop(
+                          'Error, \nNama barang tidak boleh kosong',
                         );
                         return;
                       }
@@ -340,8 +332,10 @@ class TambahInvoicePembelianPage extends StatelessWidget {
       updateHargaJual = false;
       final hargaBeli = (barangData['harga'] ?? 0).toDouble();
       final hargaJual = (barangData['hargaJual'] ?? 0).toDouble();
-      hargaBeliController.text = hargaBeli > 0 ? controller.formatNumber(hargaBeli) : '';
-      hargaJualController.text = hargaJual > 0 ? controller.formatNumber(hargaJual) : '';
+      hargaBeliController.text =
+          hargaBeli > 0 ? controller.formatNumber(hargaBeli) : '';
+      hargaJualController.text =
+          hargaJual > 0 ? controller.formatNumber(hargaJual) : '';
     }
 
     Get.dialog(
@@ -376,9 +370,14 @@ class TambahInvoicePembelianPage extends StatelessWidget {
                         onChanged: (value) {
                           setState(() {
                             updateHargaBeli = value ?? false;
-                            if (!updateHargaBeli && isExistingBarang && barangData != null) {
-                              final hargaBeli = (barangData['harga'] ?? 0).toDouble();
-                              hargaBeliController.text = hargaBeli > 0 ? controller.formatNumber(hargaBeli) : '';
+                            if (!updateHargaBeli &&
+                                isExistingBarang &&
+                                barangData != null) {
+                              final hargaBeli =
+                                  (barangData['harga'] ?? 0).toDouble();
+                              hargaBeliController.text = hargaBeli > 0
+                                  ? controller.formatNumber(hargaBeli)
+                                  : '';
                             }
                           });
                         },
@@ -388,7 +387,8 @@ class TambahInvoicePembelianPage extends StatelessWidget {
                   ),
                   TextField(
                     controller: hargaBeliController,
-                    keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                    keyboardType:
+                        const TextInputType.numberWithOptions(decimal: true),
                     enabled: updateHargaBeli,
                     onChanged: (value) {
                       if (value.isEmpty) return;
@@ -399,7 +399,8 @@ class TambahInvoicePembelianPage extends StatelessWidget {
                       final formatted = controller.formatNumber(number);
                       hargaBeliController.value = TextEditingValue(
                         text: formatted,
-                        selection: TextSelection.collapsed(offset: formatted.length),
+                        selection:
+                            TextSelection.collapsed(offset: formatted.length),
                       );
                     },
                     decoration: InputDecoration(
@@ -419,9 +420,14 @@ class TambahInvoicePembelianPage extends StatelessWidget {
                         onChanged: (value) {
                           setState(() {
                             updateHargaJual = value ?? false;
-                            if (!updateHargaJual && isExistingBarang && barangData != null) {
-                              final hargaJual = (barangData['hargaJual'] ?? 0).toDouble();
-                              hargaJualController.text = hargaJual > 0 ? controller.formatNumber(hargaJual) : '';
+                            if (!updateHargaJual &&
+                                isExistingBarang &&
+                                barangData != null) {
+                              final hargaJual =
+                                  (barangData['hargaJual'] ?? 0).toDouble();
+                              hargaJualController.text = hargaJual > 0
+                                  ? controller.formatNumber(hargaJual)
+                                  : '';
                             }
                           });
                         },
@@ -431,7 +437,8 @@ class TambahInvoicePembelianPage extends StatelessWidget {
                   ),
                   TextField(
                     controller: hargaJualController,
-                    keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                    keyboardType:
+                        const TextInputType.numberWithOptions(decimal: true),
                     enabled: updateHargaJual,
                     onChanged: (value) {
                       if (value.isEmpty) return;
@@ -442,7 +449,8 @@ class TambahInvoicePembelianPage extends StatelessWidget {
                       final formatted = controller.formatNumber(number);
                       hargaJualController.value = TextEditingValue(
                         text: formatted,
-                        selection: TextSelection.collapsed(offset: formatted.length),
+                        selection:
+                            TextSelection.collapsed(offset: formatted.length),
                       );
                     },
                     decoration: InputDecoration(
@@ -466,44 +474,33 @@ class TambahInvoicePembelianPage extends StatelessWidget {
                         onPressed: () async {
                           final jumlah =
                               int.tryParse(jumlahBarangController.text) ?? 0;
-                          final hargaBeli =
-                              double.tryParse(hargaBeliController.text.replaceAll('.', '')) ?? 0;
-                          final hargaJual =
-                              double.tryParse(hargaJualController.text.replaceAll('.', '')) ?? 0;
+                          final hargaBeli = double.tryParse(hargaBeliController
+                                  .text
+                                  .replaceAll('.', '')) ??
+                              0;
+                          final hargaJual = double.tryParse(hargaJualController
+                                  .text
+                                  .replaceAll('.', '')) ??
+                              0;
 
                           if (jumlah <= 0) {
-                            Get.snackbar(
-                              "Error",
-                              "Jumlah harus lebih dari 0",
-                              backgroundColor: kColorFourth.withOpacity(0.8),
-                              colorText: kColorPureWhite,
-                              snackPosition: SnackPosition.BOTTOM,
-                            );
+                            showErrorSnackbarFromTop(
+                                "Error, \nJumlah harus lebih dari 0");
                             return;
                           }
                           if (updateHargaBeli && hargaBeli <= 0) {
-                            Get.snackbar(
-                              "Error",
-                              "Harga beli harus lebih dari 0 jika diupdate",
-                              backgroundColor: kColorFourth.withOpacity(0.8),
-                              colorText: kColorPureWhite,
-                              snackPosition: SnackPosition.BOTTOM,
+                            showErrorSnackbarFromTop(
+                              "Error, \nHarga beli harus lebih dari 0 jika diupdate",
                             );
                             return;
                           }
                           if (updateHargaJual && hargaJual <= 0) {
-                            Get.snackbar(
-                              "Error",
-                              "Harga jual harus lebih dari 0 jika diupdate",
-                              backgroundColor: kColorFourth.withOpacity(0.8),
-                              colorText: kColorPureWhite,
-                              snackPosition: SnackPosition.BOTTOM,
-                            );
+                            showErrorSnackbarFromTop(
+                                "Error, \nHarga jual harus lebih dari 0 jika diupdate");
                             return;
                           }
 
-                          final success =
-                              await controller.addItem(InvoiceItem(
+                          final success = await controller.addItem(InvoiceItem(
                             nama: namaBarang,
                             jumlah: jumlah,
                             hargaBeli: hargaBeli,
@@ -517,13 +514,8 @@ class TambahInvoicePembelianPage extends StatelessWidget {
                             searchBarangController.clear();
                             controller.searchQueryBarang.value = '';
 
-                            Get.snackbar(
-                              "Sukses",
-                              "Barang berhasil ditambahkan",
-                              backgroundColor: kColorThird.withOpacity(0.8),
-                              colorText: kColorPureWhite,
-                              snackPosition: SnackPosition.BOTTOM,
-                            );
+                            showErrorSnackbarFromTop(
+                                "Error, \nBarang berhasil ditambahkan");
                           }
                         },
                         style: ElevatedButton.styleFrom(
@@ -752,24 +744,12 @@ class TambahInvoicePembelianPage extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           if (controller.items.isEmpty) {
-            Get.snackbar(
-              "Error",
-              "Tambahkan minimal satu barang",
-              backgroundColor: kColorFourth.withOpacity(0.8),
-              colorText: kColorPureWhite,
-              snackPosition: SnackPosition.BOTTOM,
-            );
+            showErrorSnackbarFromTop("Error, \nTambahkan minimal satu barang");
             return;
           }
 
           if (controller.namaPemasok.value.trim().isEmpty) {
-            Get.snackbar(
-              "Error",
-              "Harap masukkan nama pemasok",
-              backgroundColor: kColorFourth.withOpacity(0.8),
-              colorText: kColorPureWhite,
-              snackPosition: SnackPosition.BOTTOM,
-            );
+            showErrorSnackbarFromTop("Error, \nHarap masukkan nama pemasok");
             return;
           }
 
@@ -787,6 +767,54 @@ class TambahInvoicePembelianPage extends StatelessWidget {
           style: TStyle.button1.copyWith(color: kColorPureWhite),
         ),
       ),
+    );
+  }
+
+  showSuccessSnackbarFromTop(String message) {
+    Get.rawSnackbar(
+      messageText: Row(
+        children: [
+          Icon(Icons.check_circle_outline, color: Colors.white),
+          SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              message,
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
+      ),
+      backgroundColor: Colors.green.shade600,
+      borderRadius: 16,
+      margin: const EdgeInsets.all(16),
+      snackPosition: SnackPosition.TOP,
+      animationDuration: const Duration(milliseconds: 300),
+      duration: const Duration(seconds: 2),
+      isDismissible: true,
+    );
+  }
+
+  showErrorSnackbarFromTop(String message) {
+    Get.rawSnackbar(
+      messageText: Row(
+        children: [
+          const Icon(Icons.error_outline, color: Colors.white),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              message,
+              style: const TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
+      ),
+      backgroundColor: Colors.red.shade600,
+      borderRadius: 16,
+      margin: const EdgeInsets.all(16),
+      snackPosition: SnackPosition.TOP,
+      animationDuration: const Duration(milliseconds: 300),
+      duration: const Duration(seconds: 2),
+      isDismissible: true,
     );
   }
 }

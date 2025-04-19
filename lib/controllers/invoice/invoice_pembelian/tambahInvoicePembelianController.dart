@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -78,43 +79,23 @@ class TambahInvoicePembelianController extends GetxController {
   Future<bool> addItem(InvoiceItem item) async {
     try {
       if (item.jumlah <= 0) {
-        Get.snackbar(
-          'Error',
-          'Jumlah harus lebih dari 0',
-          backgroundColor: kColorFourth.withOpacity(0.8),
-          colorText: kColorPureWhite,
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        showErrorSnackbarFromTop('Error, \nJumlah harus lebih dari 0');
         return false;
       }
       if (item.hargaBeli <= 0 && item.updateHargaBeli) {
-        Get.snackbar(
-          'Error',
-          'Harga beli harus lebih dari 0 jika ingin diupdate',
-          backgroundColor: kColorFourth.withOpacity(0.8),
-          colorText: kColorPureWhite,
-          snackPosition: SnackPosition.BOTTOM,
+        showErrorSnackbarFromTop(
+          'Error, \nHarga beli harus lebih dari 0 jika ingin diupdate',
         );
         return false;
       }
       if (item.hargaJual <= 0 && item.updateHargaJual) {
-        Get.snackbar(
-          'Error',
-          'Harga jual harus lebih dari 0 jika ingin diupdate',
-          backgroundColor: kColorFourth.withOpacity(0.8),
-          colorText: kColorPureWhite,
-          snackPosition: SnackPosition.BOTTOM,
+        showErrorSnackbarFromTop(
+          'Error, \nHarga jual harus lebih dari 0 jika ingin diupdate',
         );
         return false;
       }
       if (item.nama.trim().isEmpty) {
-        Get.snackbar(
-          'Error',
-          'Nama barang tidak boleh kosong',
-          backgroundColor: kColorFourth.withOpacity(0.8),
-          colorText: kColorPureWhite,
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        showErrorSnackbarFromTop('Error, \nNama barang tidak boleh kosong');
         return false;
       }
 
@@ -136,12 +117,8 @@ class TambahInvoicePembelianController extends GetxController {
       return true;
     } catch (e) {
       print('Error adding item: $e');
-      Get.snackbar(
-        'Error',
-        'Gagal menambahkan barang: $e',
-        backgroundColor: kColorFourth.withOpacity(0.8),
-        colorText: kColorPureWhite,
-        snackPosition: SnackPosition.BOTTOM,
+      showErrorSnackbarFromTop(
+        'Error, \nGagal menambahkan barang: $e',
       );
       return false;
     }
@@ -178,12 +155,8 @@ class TambahInvoicePembelianController extends GetxController {
       searchResultsBarang.assignAll(filteredResults);
     } catch (e) {
       print('Error searching products: $e');
-      Get.snackbar(
-        'Error',
-        'Gagal mencari barang: $e',
-        backgroundColor: kColorFourth.withOpacity(0.8),
-        colorText: kColorPureWhite,
-        snackPosition: SnackPosition.BOTTOM,
+      showErrorSnackbarFromTop(
+        'Error, \nGagal mencari barang: $e',
       );
     } finally {
       isSearchingBarang.value = false;
@@ -213,16 +186,13 @@ class TambahInvoicePembelianController extends GetxController {
       generateInvoiceNumber();
       final invoiceNumber = nomorInvoice.value;
 
-      final invoiceDoc =
-          await _firestore.collection('invoices_pembelian').doc(invoiceNumber).get();
+      final invoiceDoc = await _firestore
+          .collection('invoices_pembelian')
+          .doc(invoiceNumber)
+          .get();
       if (invoiceDoc.exists) {
-        Get.snackbar(
-          'Error',
-          'Nomor invoice "$invoiceNumber" sudah digunakan, coba lagi',
-          backgroundColor: kColorFourth.withOpacity(0.8),
-          colorText: kColorPureWhite,
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        showErrorSnackbarFromTop(
+            'Error, \nNomor invoice "$invoiceNumber" sudah digunakan, coba lagi');
         return;
       }
 
@@ -248,7 +218,8 @@ class TambahInvoicePembelianController extends GetxController {
       };
 
       print('Saving invoice to invoices_pembelian: $invoiceData');
-      final invoiceRef = _firestore.collection('invoices_pembelian').doc(invoiceNumber);
+      final invoiceRef =
+          _firestore.collection('invoices_pembelian').doc(invoiceNumber);
       batch.set(invoiceRef, invoiceData);
 
       // Update koleksi barang
@@ -301,22 +272,61 @@ class TambahInvoicePembelianController extends GetxController {
 
       Get.back(result: true);
 
-      Get.snackbar(
-        'Sukses',
-        'Invoice pembelian berhasil disimpan',
-        backgroundColor: kColorThird.withOpacity(0.8),
-        colorText: kColorPureWhite,
-        snackPosition: SnackPosition.BOTTOM,
+      showSuccessSnackbarFromTop(
+        'Sukses, \nInvoice pembelian berhasil disimpan',
       );
     } catch (e) {
       print('Error saving invoice: $e');
-      Get.snackbar(
-        'Error',
-        'Gagal menyimpan invoice atau memperbarui stok/harga: $e',
-        backgroundColor: kColorFourth.withOpacity(0.8),
-        colorText: kColorPureWhite,
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      showErrorSnackbarFromTop(
+          'Error, \nGagal menyimpan invoice atau memperbarui stok/harga: $e');
     }
+  }
+
+  void showSuccessSnackbarFromTop(String message) {
+    Get.rawSnackbar(
+      messageText: Row(
+        children: [
+          Icon(Icons.check_circle_outline, color: Colors.white),
+          SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              message,
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
+      ),
+      backgroundColor: Colors.green.shade600,
+      borderRadius: 16,
+      margin: const EdgeInsets.all(16),
+      snackPosition: SnackPosition.TOP,
+      animationDuration: const Duration(milliseconds: 300),
+      duration: const Duration(seconds: 2),
+      isDismissible: true,
+    );
+  }
+
+  void showErrorSnackbarFromTop(String message) {
+    Get.rawSnackbar(
+      messageText: Row(
+        children: [
+          const Icon(Icons.error_outline, color: Colors.white),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              message,
+              style: const TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
+      ),
+      backgroundColor: Colors.red.shade600,
+      borderRadius: 16,
+      margin: const EdgeInsets.all(16),
+      snackPosition: SnackPosition.TOP,
+      animationDuration: const Duration(milliseconds: 300),
+      duration: const Duration(seconds: 2),
+      isDismissible: true,
+    );
   }
 }

@@ -5,12 +5,12 @@ import '../../../model/invoice/history_pembelian/history_pembelian_model.dart';
 class HistoryPembelianController extends GetxController {
   var filters = <HistoryPembelianModel>[
     HistoryPembelianModel(label: 'All'),
-    HistoryPembelianModel(label: 'January'),
-    HistoryPembelianModel(label: 'February'),
-    HistoryPembelianModel(label: 'March'),
-    HistoryPembelianModel(label: 'April'),
-    HistoryPembelianModel(label: '1oaksoikask'),
-    HistoryPembelianModel(label: '2oaksoaksas'),
+    HistoryPembelianModel(label: 'January', month: 1),
+    HistoryPembelianModel(label: 'February', month: 2),
+    HistoryPembelianModel(label: 'March', month: 3),
+    HistoryPembelianModel(label: 'April', month: 4),
+    HistoryPembelianModel(label: 'Mei', month: 5),
+    HistoryPembelianModel(label: 'Juni', month: 6),
   ].obs;
 
   var selectedIndex = 0.obs;

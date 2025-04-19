@@ -94,12 +94,10 @@ class ProfilPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                // Konten lainnya (termasuk bagian header yang tidak dipin)
                 SliverToBoxAdapter(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Bagian header yang tidak dipin (avatar, nama, email, role)
                       Container(
                         width: Get.width,
                         padding:
@@ -233,7 +231,7 @@ class ProfilPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 18),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Column(
@@ -334,7 +332,7 @@ class ProfilPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 18),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Column(

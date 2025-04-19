@@ -62,9 +62,8 @@ class CardNews extends StatelessWidget {
                     child: Text(
                       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus porta mollis suscipit. Donec laoreet laoreet ante, et porta urna faucibus in. Nulla facilisi. Nam dictum augue quis convallis suscipit. Nulla dignissim volutpat magna, in vulputate nisi.",
                       style: TStyle.caption,
-                      maxLines: 4,
-                      overflow: TextOverflow
-                          .ellipsis, // Bisa dihapus kalau mau tampil semua
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],

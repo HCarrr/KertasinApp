@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:kertasinapp/pages/barang/BarangPage.dart';
-import 'package:kertasinapp/pages/invoice/InvoicePembelianPage.dart';
-import 'package:kertasinapp/pages/invoice/InvoicePenjualanPage.dart';
+import 'package:kertasinapp/pages/invoice/invoice_pembelian/InvoicePembelianPage.dart';
+import 'package:kertasinapp/pages/invoice/invoice_penjualan/InvoicePenjualanPage.dart';
 import 'package:kertasinapp/pages/login/LoginPage.dart';
 import 'package:kertasinapp/routes/route_name.dart';
 
@@ -20,7 +20,7 @@ class ProductButtonController extends GetxController {
       {
         'text': 'Invoice Penjualan',
         'onTap': () {
-          Get.toNamed(RoutesName.invoicePembelianPage);
+          Get.toNamed(RoutesName.invoicePenjualanPage);
         },
       },
       {
