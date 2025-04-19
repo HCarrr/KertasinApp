@@ -416,7 +416,7 @@ class ProfilPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: Get.height * 0.1),
                     ],
                   ),
                 ),

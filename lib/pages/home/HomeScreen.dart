@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kertasinapp/controllers/home/productButtonController.dart';
 import 'package:kertasinapp/controllers/home/user_controller.dart';
+import 'package:kertasinapp/routes/route_name.dart';
 import 'package:kertasinapp/utilities/colors.dart';
 import 'package:kertasinapp/utilities/typhography.dart';
 import 'package:kertasinapp/widgets/ButtonCard.dart';
@@ -70,6 +71,9 @@ class Homescreen extends StatelessWidget {
                 Row(
                   children: [
                     Buttondefault(
+                      onTap: () => {
+                        Get.toNamed(RoutesName.addInvoicePenjualanPage),
+                      },
                       text: "Buat Invoice Sekarang",
                       isPrimary: false,
                     ),
