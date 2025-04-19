@@ -36,7 +36,8 @@ class BarangPage extends StatelessWidget {
                             alignment: Alignment.centerLeft,
                             child: IconButton(
                               onPressed: () => Get.back(),
-                              icon: const Icon(Icons.arrow_back_ios_new_rounded),
+                              icon:
+                                  const Icon(Icons.arrow_back_ios_new_rounded),
                               color: kColorPureWhite,
                             ),
                           ),
@@ -172,7 +173,8 @@ class BarangPage extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 4),
-                            Text("Harga Jual: Rp${numberFormat.format(barang.hargaJual)}"),
+                            Text(
+                                "Harga Jual: Rp${numberFormat.format(barang.hargaJual)}"),
                             Text("Stok: ${barang.stok}"),
                           ],
                         ),

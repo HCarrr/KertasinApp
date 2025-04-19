@@ -108,6 +108,14 @@ class ProfilPage extends StatelessWidget {
                             bottomLeft: Radius.circular(24),
                             bottomRight: Radius.circular(24),
                           ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.2),
+                              spreadRadius: 5,
+                              blurRadius: 7,
+                              offset: Offset(0, 3),
+                            ),
+                          ],
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

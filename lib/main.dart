@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: kColorPureWhite,
       ),
-      initialRoute: RoutesName.mainPage,
+      initialRoute: RoutesName.loginPage,
       getPages: PagesRoute.pages,
     );
   }

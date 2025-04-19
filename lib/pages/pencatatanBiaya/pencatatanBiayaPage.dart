@@ -135,8 +135,7 @@ class PencatatanBiayaPage extends StatelessWidget {
           SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.only(left: 16),
-            child: const Text("History",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            child: Text("History", style: TStyle.headline3),
           ),
           Expanded(
             child: Padding(
@@ -250,10 +249,10 @@ class PencatatanBiayaPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Nama Biaya : ${item['nomorInvoice']}",
+          Text("No. Inovice: ${item['nomorInvoice']}",
               style: const TextStyle(fontWeight: FontWeight.bold)),
           Text(
-              "Total Biaya : Rp ${numberFormat.format(item['totalHarga']).replaceAll(',', '.')}"),
+              "Total Biaya: Rp ${numberFormat.format(item['totalHarga']).replaceAll(',', '.')}"),
           const SizedBox(height: 4),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
