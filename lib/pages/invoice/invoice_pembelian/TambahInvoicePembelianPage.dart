@@ -514,8 +514,8 @@ class TambahInvoicePembelianPage extends StatelessWidget {
                             searchBarangController.clear();
                             controller.searchQueryBarang.value = '';
 
-                            showErrorSnackbarFromTop(
-                                "Error, \nBarang berhasil ditambahkan");
+                            showSuccessSnackbarFromTop(
+                                "Sukses, \nBarang berhasil ditambahkan");
                           }
                         },
                         style: ElevatedButton.styleFrom(

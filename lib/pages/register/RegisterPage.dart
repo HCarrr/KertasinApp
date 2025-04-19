@@ -91,6 +91,11 @@ class RegisterPage extends StatelessWidget {
                         isPassword: true,
                         controller: controller.passwordController,
                       ),
+                      CustomTextField(
+                        hintText: 'Confirm Password',
+                        isPassword: true,
+                        controller: controller.confirmPasswordController, // Field baru
+                      ),
                       const SizedBox(height: 16),
                       Obx(() => Stack(
                             alignment: Alignment.center,

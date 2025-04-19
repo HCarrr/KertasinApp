@@ -11,13 +11,39 @@ class RegisterController extends GetxController {
   // State variables menggunakan Rx dari GetX
   final RxBool isLoading = false.obs;
 
-  // TextEditingController untuk name, email, dan password
+  // TextEditingController untuk name, email, password, dan confirm password
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController(); // Controller baru
 
   Future<void> register() async {
     try {
+      // Validasi input
+      if (passwordController.text.trim() != confirmPasswordController.text.trim()) {
+        Get.snackbar(
+          'Error',
+          'Password dan konfirmasi password tidak cocok.',
+          backgroundColor: Colors.redAccent,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        return;
+      }
+
+      if (nameController.text.trim().isEmpty ||
+          emailController.text.trim().isEmpty ||
+          passwordController.text.trim().isEmpty) {
+        Get.snackbar(
+          'Error',
+          'Semua field harus diisi.',
+          backgroundColor: Colors.redAccent,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        return;
+      }
+
       print("Attempting to register with email: ${emailController.text.trim()}");
       isLoading.value = true;
 
@@ -71,6 +97,7 @@ class RegisterController extends GetxController {
     nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
+    confirmPasswordController.dispose(); // Dispose controller baru
     super.onClose();
   }
 }
